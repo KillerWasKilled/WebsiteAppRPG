@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using WebsiteAppRPG.WebsiteAppRPG.Core.Entities;
 
-namespace WebsiteAppRPG.Controllers
+namespace WebsiteAppRPG.WebsiteAppRPG.WebApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]

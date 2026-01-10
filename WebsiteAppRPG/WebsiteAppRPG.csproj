@@ -12,9 +12,7 @@
 
   <ItemGroup>
     <Folder Include="WebsiteAppRPG.Infrastructure\" />
-    <Folder Include="WebsiteAppRPG.Application\" />
     <Folder Include="WebsiteAppRPG.Persistence\" />
-    <Folder Include="WebsiteAppRPG.WebApi\" />
   </ItemGroup>
 
 </Project>

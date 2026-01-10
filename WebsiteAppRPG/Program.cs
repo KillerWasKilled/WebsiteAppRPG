@@ -1,4 +1,6 @@
 
+using WebsiteAppRPG.WebsiteAppRPG.Application;
+
 namespace WebsiteAppRPG
 {
     public class Program
@@ -8,6 +10,7 @@ namespace WebsiteAppRPG
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddSingleton<GameService>();
 
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -24,7 +27,6 @@ namespace WebsiteAppRPG
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

@@ -1,4 +1,4 @@
-namespace WebsiteAppRPG
+namespace WebsiteAppRPG.WebsiteAppRPG.Core.Entities
 {
     public class WeatherForecast
     {
