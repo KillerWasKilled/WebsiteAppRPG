@@ -5,14 +5,14 @@ using WebsiteAppRPG.WebsiteAppRPG.Core.Entities;
 namespace WebsiteAppRPG.WebsiteAppRPG.WebApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/players")]
     public class PlayerController : ControllerBase
     {
         private readonly GameService _gameService;
 
-        public PlayerController(GameService gameService)
+        public PlayerController()
         {
-            _gameService = gameService;
+            _gameService = new();
         }
 
         [HttpGet]

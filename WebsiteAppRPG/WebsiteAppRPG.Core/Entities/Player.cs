@@ -4,20 +4,26 @@
     {
         public string Name { get; set; }
 
-        public (int X, int Y) PlayerPosition { get; set; }
+        public int PlayerPositionX { get; set; }
+
+        public int PlayerPositionY { get; set; }
 
         public PlayerColors Colors { get; set; }
 
         public Player()
         {
             Name = "Steve";
-            PlayerPosition = (0, 0);
+            PlayerPositionX = 0;
+            PlayerPositionY = 0;
+            Colors = new PlayerColors(0, 127, 255, 75);
         }
 
         public Player(string name)
         {
             Name = name;
-            PlayerPosition = (0, 0);
+            PlayerPositionX = 0;
+            PlayerPositionY = 0;
+            Colors = new PlayerColors(0, 127, 255, 75);
         }
     }
 }
