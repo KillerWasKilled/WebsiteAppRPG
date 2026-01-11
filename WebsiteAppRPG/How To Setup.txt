@@ -1,0 +1,10 @@
+Získání projektu:
+git clone %odkaz na repozitář%
+
+Instalace Frontendu:
+cd %cesta k frontendu%
+npm install
+npm run dev
+
+Nastavení Backendu:
+Změnit ConnectionString
