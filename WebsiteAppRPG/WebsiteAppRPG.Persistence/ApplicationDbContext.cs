@@ -3,9 +3,11 @@ using WebsiteAppRPG.WebsiteAppRPG.Core.Entities;
 
 namespace WebsiteAppRPG.WebsiteAppRPG.Persistence
 {
-    public class PlayerDbContext : DbContext
+    public class ApplicationDbContext : DbContext
     {
         public DbSet<Player> Players { get; set; }
+
+        public DbSet<Map> Maps { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

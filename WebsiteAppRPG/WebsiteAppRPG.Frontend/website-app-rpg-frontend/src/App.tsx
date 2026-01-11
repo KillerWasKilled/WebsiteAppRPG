@@ -2,6 +2,7 @@
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 import Game from './components/Game'
+import Map from './components/Map'
 import './App.css'
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <h1>Website App RPG</h1>
       <h2>Here are the champions: </h2>
       <Game />
+      <Map />
     </div>
     /*
     <>

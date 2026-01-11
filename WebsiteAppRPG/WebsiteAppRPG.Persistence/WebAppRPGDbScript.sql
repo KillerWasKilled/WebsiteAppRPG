@@ -36,5 +36,5 @@ VALUES
 GO
 
 INSERT INTO Maps(MapWidth, MapHeight)
-VALUES (20, 20);
+VALUES (30, 20);
 GO

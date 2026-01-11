@@ -7,6 +7,7 @@ export async function fetchPlayers(): Promise<Player[]> {
   return response.json();
 }
 
+/*
 export async function movePlayer(
   name: string,
   direction: string
@@ -19,3 +20,4 @@ export async function movePlayer(
 
   return response.json();
 }
+*/
