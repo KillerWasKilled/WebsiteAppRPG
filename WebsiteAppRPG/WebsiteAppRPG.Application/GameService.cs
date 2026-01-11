@@ -1,15 +1,17 @@
 ﻿using WebsiteAppRPG.WebsiteAppRPG.Core.Entities;
+using WebsiteAppRPG.WebsiteAppRPG.Persistence;
 
 namespace WebsiteAppRPG.WebsiteAppRPG.Application
 {
     public class GameService
     {
-        private readonly List<Player> _players;
+        private readonly PlayerDbContext _players;
 
         public GameService()
         {
-            _players = [];
+            _players = new();
 
+            /*
             _players.Add(new Player());
             _players.Add(new Player("Jirka"));
             _players.Add(new Player("Samuel"));
@@ -22,11 +24,13 @@ namespace WebsiteAppRPG.WebsiteAppRPG.Application
             _players.Add(new Player("Spongebob"));
             _players.Add(new Player("Domča"));
             _players.Add(new Player("Sonic"));
+            _players.Add(new Player("Homer Simpson"));
+            */
         }
 
         public List<Player> GetPlayers()
         {
-            return _players;
+            return _players.Players.ToList();
         }
     }
 }

@@ -1,0 +1,40 @@
+USE master;
+GO
+
+IF EXISTS (SELECT * FROM sys.databases WHERE name='WebAppRPGDb')
+BEGIN
+	ALTER DATABASE WebAppRPGDb SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+	DROP DATABASE WebAppRPGDb;
+END
+GO
+
+CREATE DATABASE WebAppRPGDb;
+GO
+
+USE WebAppRPGDb;
+GO
+
+CREATE TABLE Players(
+PlayerID INT IDENTITY(1,1) PRIMARY KEY,
+Name NVARCHAR(50) NOT NULL,
+PlayerPositionX INT NOT NULL,
+PlayerPositionY INT NOT NULL
+);
+GO
+
+CREATE TABLE Maps(
+MapID INT IDENTITY(1,1) PRIMARY KEY,
+MapWidth INT NOT NULL,
+MapHeight INT NOT NULL
+);
+GO
+
+INSERT INTO Players (Name, PlayerPositionX, PlayerPositionY)
+VALUES
+('Samuel', 50, 0),
+('Domèa', 0, 12);
+GO
+
+INSERT INTO Maps(MapWidth, MapHeight)
+VALUES (20, 20);
+GO
