@@ -14,27 +14,51 @@ GO
 USE WebAppRPGDb;
 GO
 
-CREATE TABLE Players(
-PlayerID INT IDENTITY(1,1) PRIMARY KEY,
-Name NVARCHAR(50) NOT NULL,
-PlayerPositionX INT NOT NULL,
-PlayerPositionY INT NOT NULL
-);
+IF NOT EXISTS (SELECT * FROM sys.tables WHERE NAME = 'Users')
+BEGIN
+	CREATE TABLE Users(
+	UserID INT IDENTITY(1,1) PRIMARY KEY,
+	Email NVARCHAR(100) NOT NULL UNIQUE,
+	UserName NVARCHAR(100) NOT NULL UNIQUE,
+	Password NVARCHAR(50) NOT NULL
+	);
+END
 GO
 
-CREATE TABLE Maps(
-MapID INT IDENTITY(1,1) PRIMARY KEY,
-MapWidth INT NOT NULL,
-MapHeight INT NOT NULL
-);
+IF NOT EXISTS (SELECT * FROM sys.tables WHERE NAME = 'Maps')
+BEGIN
+	CREATE TABLE Maps(
+	MapID INT IDENTITY(1,1) PRIMARY KEY,
+	MapWidth INT NOT NULL,
+	MapHeight INT NOT NULL
+	);
+END
 GO
 
-INSERT INTO Players (Name, PlayerPositionX, PlayerPositionY)
+IF NOT EXISTS (SELECT * FROM sys.tables WHERE NAME = 'Players')
+BEGIN
+	CREATE TABLE Players(
+	PlayerID INT IDENTITY(1,1) PRIMARY KEY,
+	Name NVARCHAR(50) NOT NULL,
+	PlayerPositionX INT NOT NULL,
+	PlayerPositionY INT NOT NULL,
+	MapID INT NOT NULL,
+	CONSTRAINT FK_Players_Maps FOREIGN KEY (MapID) REFERENCES Maps(MapID)
+	);
+END
+GO
+
+INSERT INTO Users(Email, UserName, Password)
 VALUES
-('Samuel', 50, 0),
-('Domèa', 0, 12);
+('fabrysamuel@sssvt.cz', 'KillerWasKilled', '123456Ab');
 GO
 
 INSERT INTO Maps(MapWidth, MapHeight)
-VALUES (30, 20);
+VALUES
+(30, 20);
+Go
+
+INSERT INTO Players(Name, PlayerPositionX, PlayerPositionY, MapID)
+VALUES
+('');
 GO
