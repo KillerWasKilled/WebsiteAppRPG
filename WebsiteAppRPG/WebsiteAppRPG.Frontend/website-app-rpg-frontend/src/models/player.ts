@@ -19,18 +19,25 @@ export class PlayerColors{
 
 export class Player{
 
-    public name: String;
+    public playerID: number;
 
-    public playerPositionX: Number;
+    public email: string;
 
-    public playerPositionY: Number;
+    public name: string;
 
-    public playerColors: PlayerColors;
+    public password: string;
 
-    constructor(name: String) {
+    public positionX: number;
+
+    public positionY: number;
+
+    constructor(playerID: number, email: string, name: string, password: string, positionX: number, positionY: number)
+    {
+        this.playerID = playerID;
+        this.email = email;
         this.name = name;
-        this.playerPositionX = 0;
-        this.playerPositionY = 0;
-        this.playerColors = new PlayerColors(0, 127, 255, 75);
+        this.password = password;
+        this.positionX = positionX;
+        this.positionY = positionY;
     }
 }

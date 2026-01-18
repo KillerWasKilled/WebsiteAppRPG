@@ -1,11 +1,26 @@
 export class Map {
-    
-    public mapWidth: Number;
 
-    public mapHeight: Number;
+    public name: string;
     
-    constructor(mapWidth: Number, mapHeight: Number) {
-        this.mapWidth = mapWidth;
-        this.mapHeight = mapHeight;
+    public width: number;
+    public height: number;
+
+    public entranceX: number;
+    public entranceY: number;
+
+    public exitX: number;
+    public exitY: number;
+    
+    constructor(name: string, mapWidth: number, mapHeight: number, entranceX: number, entranceY: number, exitX: number, exitY: number) {
+        this.name = name;
+
+        this.width = mapWidth;
+        this.height = mapHeight;
+
+        this.entranceX = entranceX;
+        this.entranceY = entranceY;
+
+        this.exitX = exitX;
+        this.exitY = exitY;
     }
 }

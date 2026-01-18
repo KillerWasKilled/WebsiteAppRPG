@@ -1,31 +1,37 @@
-﻿namespace WebsiteAppRPG.WebsiteAppRPG.Core.Entities
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace WebsiteAppRPG.WebsiteAppRPG.Core.Entities
 {
+    [Table("Players")]
     public class Player
     {
+        [Key]
+        [Column("PlayerID")]
         public int PlayerID { get; set; }
 
+        [Column("Email")]
+        public string Email { get; set; }
+
+        [Column("PlayerName")]
         public string Name { get; set; }
 
-        public int PlayerPositionX { get; set; }
+        [Column("Password")]
+        public string Password { get; set; }
 
-        public int PlayerPositionY { get; set; }
+        [Column("PositionX")]
+        public int PositionX { get; set; }
 
-        // public PlayerColors Colors { get; set; }
+        [Column("PositionY")]
+        public int PositionY { get; set; }
 
-        public Player()
+        public Player(string email, string name, string password, int positionX, int positionY)
         {
-            Name = "Steve";
-            PlayerPositionX = 0;
-            PlayerPositionY = 0;
-            // Colors = new PlayerColors(0, 127, 255, 75);
-        }
-
-        public Player(string name)
-        {
+            Email = email;
             Name = name;
-            PlayerPositionX = 0;
-            PlayerPositionY = 0;
-            // Colors = new PlayerColors(0, 127, 255, 75);
+            Password = password;
+            PositionX = positionX;
+            PositionY = positionY;
         }
     }
 }

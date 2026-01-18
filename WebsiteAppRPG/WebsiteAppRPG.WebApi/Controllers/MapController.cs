@@ -4,7 +4,7 @@ using WebsiteAppRPG.WebsiteAppRPG.Application;
 namespace WebsiteAppRPG.WebsiteAppRPG.WebApi.Controllers
 {
     [ApiController]
-    [Route("api/maps")]
+    [Route("apis/maps")]
     public class MapController : ControllerBase
     {
         private readonly GameService _gameService;

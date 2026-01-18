@@ -11,12 +11,10 @@ namespace WebsiteAppRPG.WebsiteAppRPG.Persistence
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=L107PC03;Database=WebAppRPGDb;Trusted_Connection=True;TrustServerCertificate=True;");
-        }
+            string homeConnectionString = "Server=SAMUEL;Database=WebAppRPGDb;Trusted_Connection=True;TrustServerCertificate=True;";
+            // string schoolConnectionString = "Server=L107PC03;Database=WebAppRPGDb;Trusted_Connection=True;TrustServerCertificate=True;";
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            // idk
+            optionsBuilder.UseSqlServer(homeConnectionString);
         }
 
     }

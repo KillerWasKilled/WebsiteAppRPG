@@ -17,28 +17,9 @@ export default function Game() {
     <ul>
       {players.map(player => (
         <li>
-          {player.name + " | " + player.playerPositionX + " | " + player.playerPositionY}
+          {`${player.playerID} | ${player.email} | ${player.name} | ${player.password}`}
         </li>
       ))}
     </ul>
   );
 }
-
-/*
-    <div>
-      <ul>
-        {players.map(player => (
-          <li>
-            {player.name + " | " + player.playerPositionX + " | " + player.playerPositionY}
-          </li>
-        ))}
-      </ul>
-      <div id="current-map">
-        {mapWidth.map((map) => (
-          <div>
-            {map}
-          </div>
-        ))}
-      </div>
-    </div>
-    */

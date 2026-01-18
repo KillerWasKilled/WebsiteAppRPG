@@ -14,12 +14,31 @@ namespace WebsiteAppRPG.WebsiteAppRPG.Application
 
         public List<Player> GetPlayers()
         {
-            return _dbContext.Players.ToList();
+            List<Player> players = [];
+
+            foreach (Player player in _dbContext.Players)
+            {
+                players.Add(player);
+            }
+
+            return players;
         }
 
         public List<Map> GetMaps()
         {
-            return _dbContext.Maps.ToList();
+            List<Map> maps = [];
+            
+            foreach (Map map in _dbContext.Maps)
+            {
+                maps.Add(map);
+            }
+
+            return maps;
         }
+
+        public void Save()
+        {
+            _dbContext.SaveChanges();
+        }   
     }
 }

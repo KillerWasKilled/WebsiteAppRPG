@@ -6,7 +6,7 @@ using WebsiteAppRPG.WebsiteAppRPG.Persistence;
 namespace WebsiteAppRPG.WebsiteAppRPG.WebApi.Controllers
 {
     [ApiController]
-    [Route("api/players")]
+    [Route("apis/players")]
     public class PlayerController : ControllerBase
     {
         private readonly GameService _gameService;
@@ -20,6 +20,23 @@ namespace WebsiteAppRPG.WebsiteAppRPG.WebApi.Controllers
         public IActionResult GetPlayers()
         {
             return Ok(_gameService.GetPlayers());
+        }
+
+        [HttpPost("/apis/players/{id}")]
+        public IActionResult UpdatePlayerPosition(int id, [FromBody] PlayerPosition position) 
+        {
+            List<Player> players = _gameService.GetPlayers();
+
+            Player? player = players.First(x => x.PlayerID == id);
+
+            if (player != null)
+            {
+                player.PositionX = position.X;
+                player.PositionY = position.Y;
+                _gameService.Save();
+            }
+
+            return Ok(player);
         }
 
     }
