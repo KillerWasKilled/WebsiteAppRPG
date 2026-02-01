@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata;
 using WebsiteAppRPG.Application;
+using WebsiteAppRPG.Application.Services.PlayerServices;
 using WebsiteAppRPG.Core.Entities;
-using WebsiteAppRPG.WebsiteAppRPG.Persistence;
+using WebsiteAppRPG.Persistence;
 
-namespace WebsiteAppRPG.WebsiteAppRPG.WebApi.Controllers
+namespace WebsiteAppRPG.WebApi.Controllers
 {
     [ApiController]
     [Route("apis/players")]
@@ -11,19 +13,32 @@ namespace WebsiteAppRPG.WebsiteAppRPG.WebApi.Controllers
     {
         private readonly GameService _gameService;
 
+        private readonly PlayerCreateService _playerCreateService;
+        private readonly PlayerReadService _playerReadService;
+
         public PlayerController()
         {
             _gameService = new();
+            _playerCreateService = new();
+            _playerReadService = new();
+        }
+
+        [HttpPost]
+        public IActionResult CreatePlayer(/*[FromBody] PlayerCreateRequest request */)
+        {
+            // return Ok(_playerCreateService.CreatePlayerPosition());
+            return Ok();
         }
 
         [HttpGet]
         public IActionResult GetPlayers()
         {
-            return Ok(_gameService.GetPlayers());
+            return Ok(_playerReadService.GetPlayers());
         }
 
+        /*
         [HttpPost("/apis/players/{id}")]
-        public IActionResult UpdatePlayerPosition(int id, [FromBody] PlayerPosition position) 
+        public IActionResult UpdatePlayerPosition(int id, [FromBody] PlayerPosition position)
         {
             List<Player> players = _gameService.GetPlayers();
 
@@ -38,6 +53,7 @@ namespace WebsiteAppRPG.WebsiteAppRPG.WebApi.Controllers
 
             return Ok(player);
         }
+        */
 
     }
 }

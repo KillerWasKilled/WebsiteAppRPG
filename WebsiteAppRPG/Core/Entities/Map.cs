@@ -20,6 +20,11 @@ namespace WebsiteAppRPG.Core.Entities
         [Column("Height")]
         public int Height { get; set; }
 
+        public Map()
+        {
+
+        }
+
         public Map(string name, int width, int height)
         {
             Name = name;

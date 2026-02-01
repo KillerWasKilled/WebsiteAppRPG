@@ -1,7 +1,7 @@
 ﻿using WebsiteAppRPG.Core.Entities;
-using WebsiteAppRPG.WebsiteAppRPG.Persistence;
+using WebsiteAppRPG.Persistence;
 
-namespace WebsiteAppRPG.Application.Services.Character
+namespace WebsiteAppRPG.Application.Services.CharacterServices
 {
     public class CharacterReadService
     {

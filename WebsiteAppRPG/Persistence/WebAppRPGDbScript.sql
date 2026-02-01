@@ -50,6 +50,7 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'MapsBarriers')
 BEGIN
 	CREATE TABLE MapsBarriers(
+	MapBarrierID INT IDENTITY (1, 1) PRIMARY KEY,
 	MapID INT NOT NULL,
 	PositionX INT NOT NULL,
 	PositionY INT NOT NULL,
@@ -61,6 +62,7 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'PlayerPositions')
 BEGIN
 	CREATE TABLE PlayerPositions(
+		PlayerPositionID INT IDENTITY (1, 1) PRIMARY KEY,
 		PlayerID INT NOT NULL UNIQUE,
 		MapID INT NOT NULL,
 		PositionX INT NOT NULL,
@@ -121,7 +123,7 @@ INSERT INTO PlayerPositions (PlayerID, MapID, PositionX, PositionY)
 VALUES
 (1, 1, 0, 0);
 
-
+SELECT * FROM Characters;
 
 -- Maps
 -- MapsBarriers

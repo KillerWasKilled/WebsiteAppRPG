@@ -17,10 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\Services\Map\" />
-    <Folder Include="Application\Services\MapBarrier\" />
-    <Folder Include="Application\Services\PlayerPosition\" />
-    <Folder Include="Application\Services\Player\" />
     <Folder Include="Infrastructure\" />
   </ItemGroup>
 

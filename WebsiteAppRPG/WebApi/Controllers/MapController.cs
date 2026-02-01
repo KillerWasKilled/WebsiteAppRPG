@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebsiteAppRPG.Application;
 
-namespace WebsiteAppRPG.WebsiteAppRPG.WebApi.Controllers
+namespace WebsiteAppRPG.WebApi.Controllers
 {
     [ApiController]
     [Route("apis/maps")]

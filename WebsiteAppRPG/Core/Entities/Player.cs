@@ -23,6 +23,11 @@ namespace WebsiteAppRPG.Core.Entities
         [Column("CharacterID")]
         public int CharacterID { get; set; }
 
+        public Player()
+        {
+            
+        }
+
         public Player(int playerId, string email, string name, string password, int characterId)
         {
             PlayerID = playerId;

@@ -1,5 +1,5 @@
 ﻿using WebsiteAppRPG.Core.Entities;
-using WebsiteAppRPG.WebsiteAppRPG.Persistence;
+using WebsiteAppRPG.Persistence;
 
 namespace WebsiteAppRPG.Application
 {
