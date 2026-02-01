@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace WebsiteAppRPG.WebsiteAppRPG.Core.Entities
+namespace WebsiteAppRPG.Core.Entities
 {
     [Table("Players")]
     public class Player
@@ -13,25 +13,23 @@ namespace WebsiteAppRPG.WebsiteAppRPG.Core.Entities
         [Column("Email")]
         public string Email { get; set; }
 
-        [Column("PlayerName")]
+        [Column("Name")]
         public string Name { get; set; }
 
         [Column("Password")]
         public string Password { get; set; }
 
-        [Column("PositionX")]
-        public int PositionX { get; set; }
+        [ForeignKey("CharacterID")]
+        [Column("CharacterID")]
+        public int CharacterID { get; set; }
 
-        [Column("PositionY")]
-        public int PositionY { get; set; }
-
-        public Player(string email, string name, string password, int positionX, int positionY)
+        public Player(int playerId, string email, string name, string password, int characterId)
         {
+            PlayerID = playerId;
             Email = email;
             Name = name;
             Password = password;
-            PositionX = positionX;
-            PositionY = positionY;
+            CharacterID = characterId;
         }
     }
 }

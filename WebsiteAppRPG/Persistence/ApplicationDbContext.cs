@@ -1,10 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WebsiteAppRPG.WebsiteAppRPG.Core.Entities;
+using WebsiteAppRPG.Core.Entities;
 
 namespace WebsiteAppRPG.WebsiteAppRPG.Persistence
 {
     public class ApplicationDbContext : DbContext
     {
+        public DbSet<Character> Characters { get; set; }
+
         public DbSet<Player> Players { get; set; }
 
         public DbSet<Map> Maps { get; set; }

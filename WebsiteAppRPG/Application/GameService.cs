@@ -1,7 +1,7 @@
-﻿using WebsiteAppRPG.WebsiteAppRPG.Core.Entities;
+﻿using WebsiteAppRPG.Core.Entities;
 using WebsiteAppRPG.WebsiteAppRPG.Persistence;
 
-namespace WebsiteAppRPG.WebsiteAppRPG.Application
+namespace WebsiteAppRPG.Application
 {
     public class GameService
     {
@@ -27,7 +27,7 @@ namespace WebsiteAppRPG.WebsiteAppRPG.Application
         public List<Map> GetMaps()
         {
             List<Map> maps = [];
-            
+
             foreach (Map map in _dbContext.Maps)
             {
                 maps.Add(map);
@@ -39,6 +39,6 @@ namespace WebsiteAppRPG.WebsiteAppRPG.Application
         public void Save()
         {
             _dbContext.SaveChanges();
-        }   
+        }
     }
 }

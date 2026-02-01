@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WebsiteAppRPG.WebsiteAppRPG.Application;
+using WebsiteAppRPG.Application;
 
 namespace WebsiteAppRPG.WebsiteAppRPG.WebApi.Controllers
 {

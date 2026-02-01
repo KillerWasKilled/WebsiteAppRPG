@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WebsiteAppRPG.WebsiteAppRPG.Application;
-using WebsiteAppRPG.WebsiteAppRPG.Core.Entities;
+using WebsiteAppRPG.Application;
+using WebsiteAppRPG.Core.Entities;
 using WebsiteAppRPG.WebsiteAppRPG.Persistence;
 
 namespace WebsiteAppRPG.WebsiteAppRPG.WebApi.Controllers
