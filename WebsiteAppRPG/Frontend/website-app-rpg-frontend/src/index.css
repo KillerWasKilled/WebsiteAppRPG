@@ -68,3 +68,13 @@ button:focus-visible {
   }
 }
 */
+
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body{
+  background-color: rgb(27, 27, 27);
+}

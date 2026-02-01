@@ -1,0 +1,34 @@
+.character-homer-simpson{
+    background-color: #FED90F;
+
+    border-top-color: #D0D0D0;
+    border-left-color: #D0D0D0;
+    border-right-color: #D0D0D0;
+
+    border-bottom-color: #70D1FE;
+}
+
+.character-marge-simpson{
+    background-color: #FED90F;
+    border-color: #daf390;
+}
+
+.character-bart-simpson{
+    background-color: #FED41D;
+
+    border-top-color: #F14E28;
+    border-left-color: #F14E28;
+    border-right-color: #F14E28;
+
+    border-bottom-color: #009DDC;
+}
+
+.character-lisa-simpson{
+    background-color: #FED41D;
+    border-color: #F14E28;
+}
+
+.character-maggie-simpson{
+    background-color: #FED41D;
+    border-color: #009DDC;
+}

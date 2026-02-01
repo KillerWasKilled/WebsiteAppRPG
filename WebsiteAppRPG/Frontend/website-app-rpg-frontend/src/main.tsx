@@ -1,13 +1,13 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import Map from './components/Map'
+import GameMap from './components/Map.tsx'
 import App from './App.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
+    {/*<App />*/}
     <App />
-    <Map />
     {/*<Map />*/}
   </StrictMode>,
 )

@@ -1,0 +1,9 @@
+label{
+    display: flex;
+    justify-content: space-between;
+}
+
+button{
+    width: 100%;
+    height: 25px;
+}

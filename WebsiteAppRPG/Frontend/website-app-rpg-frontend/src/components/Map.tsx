@@ -1,124 +1,84 @@
 import { useEffect, /*useRef,*/ useState } from "react";
+"./map.css";
 
 import { Player } from "../models/player";
-import { fetchPlayers, updatePlayerPosition } from "../api/playerApi";
+import { fetchPlayers } from "../apis/playerApi";
 
-import { Map } from "../models/map";
-import { fetchMaps } from "../api/mapApi";
+import { Map } from "../models/map"
+import { fetchMaps } from "../apis/mapApi"
 
-import "./map.css"
+import { PlayerPosition } from "../models/playerPosition";
+import { fetchPlayerPositions } from "../apis/playerPositionApi";
+
+/*
+import { MapBarrier } from "../models/mapBarrier";
+import { fetchMapBarriers } from "../apis/mapBarrierApi";
+*/
+
+import MapPoint from "./MapPoint";
 
 export default function GameMap() {
-  const [maps, setMaps] = useState<Map[]>([]);
-  const [players, setPlayers] = useState<Player[]>([]);
+    let [maps, setMaps] = useState<Map[] | null>(null);
+    let [players, setPlayers] = useState<Player[] | null>(null);
+    let [playerPositions, setPlayerPositions] = useState<PlayerPosition[] | null>(null);
 
-  const [playerPosition, setPlayerPosition] = useState({ x: 0, y: 0 });
+    useEffect(() => {
+        fetchMaps().then(data => {
+            setMaps(data);
+        });
 
-  useEffect(() => {
-    fetchPlayers()
-    .then(data => {
-      setPlayers(data)
-      setPlayerPosition({ x: data[0].positionX, y: data[0].positionY });
-    })
-    .catch(err => console.error("fetchPlayers error: ", err));
-  }, []);
+    }, []);
 
-  useEffect(() => {
-    fetchMaps()
-    .then(data => setMaps(data))
-    .catch(err => console.error("fetchMaps error: ", err));
-  }, [maps]);
+    useEffect(() => {
+        fetchPlayers().then(data => {
+            console.log("PLAYERS FROM API:", data);
+            setPlayers(data);
+        });
 
-  useEffect(() => {
-    if (maps.length === 0 ) {
-      return;
+    }, [])
+
+    useEffect(() => {
+        fetchPlayerPositions().then(data => {
+            setPlayerPositions(data);
+        });
+
+    }, [])
+
+    /*
+    useEffect(() => {
+
+        function moveAround(e: KeyboardEvent) {
+            e.preventDefault();
+
+            console.log("ahoj");
+        }
+
+        window.addEventListener("keydown", moveAround);
+
+        return () => window.removeEventListener("keypress", moveAround);
+    }, []);
+    */
+
+    if (maps === null || players === null || playerPositions === null) {
+        return <div>Waiting for data to be loaded 😑</div>
     }
+    
+    players.forEach(player => {
+        console.log(player);
+    });
 
-    function handleUserInput(e: KeyboardEvent) : void {
-      const latestMap = maps[maps.length - 1];
-      
-      const width = Number(latestMap.width);
-      const height = Number(latestMap.height);
-
-      let x = playerPosition.x;
-      let y = playerPosition.y;
-
-      if (e.key === "a" && x - 1 >= 0) {
-        x--;
-      }
-
-      else if (e.key === "w" && y - 1 >= 0) {
-        y--;
-      }
-
-      else if (e.key === "s" && y + 1 < height) {
-        y++;
-      }
-
-      else if (e.key === "d" && x + 1 < width) {
-        x++;
-      }
-
-      updatePlayerPosition(players[0].playerID, x, y);
-      setPlayerPosition({ x: x, y: y });
-    }
-
-    window.addEventListener("keydown", handleUserInput);
-
-    return () => window.removeEventListener("keydown", handleUserInput);
-
-
-  }, [maps]);
-
-  if (maps.length === 0) {
-    return <div>Loading...</div>
-  }
-
-  else {
-    let latestMap: Map = maps[maps.length - 1];
-
-    let mapWidthNumber: number = Number(latestMap.width);
-    let lastMapWidth: string[] = [];
-
-    for (let i = 0; i < mapWidthNumber; i++) {
-      lastMapWidth.push(' ');
-    }
-
-    let mapHeightNumber: number = Number(latestMap.height);
-    let lastMapHeight: string[] = [];
-
-    for (let i = 0; i < mapHeightNumber; i++) {
-      lastMapHeight.push(' ');
-    }
+    const player = players[0];
+    console.log(player);
+    console.log(player.characterID);
 
     return (
-      <div className="map-box">
-
-        {lastMapHeight.map((_, lineIndex) => (
-          
-          <div className="map-row" key={lineIndex}>
-          
-            {lastMapWidth.map((_, columnIndex) => {
-
-              const playerExists = players.some((player, playerIndex, players) => 
-                player.positionX === columnIndex && player.positionY === lineIndex);
-
-              return(
-                <span className= {playerExists ? "point player-point" : "point map-point"}  key={columnIndex}>
-                </span>
-              )
-
-              /*
-              players.map((player, playerIndex) => (
-                <span className= {player.positionX == playerPosition.x && player.positionY == playerPosition.y  ? "point player-point" : "point map-point"}  key={columnIndex}>
-                </span>
-              ))*/
-            })}
-          
-          </div>
-        
-        ))}
-      </div>
+        <div className="map-box">
+            {Array.from({ length: maps[0].height }).map((_, rowIndex) => (
+                <div key={rowIndex} className="map-row">
+                    <MapPoint width={maps[0].width} positionY={rowIndex} player={players[0]} playerPosition={playerPositions[0]} />
+                </div>
+            ))}
+        </div>
     );
-  }
+
 }

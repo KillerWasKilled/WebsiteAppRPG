@@ -1,8 +1,8 @@
-import { Player } from "../models/player";
+import { PlayerPosition } from "../models/playerPosition";
 
-const apiUrl = "http://localhost:5126/apis/players";
+const apiUrl = "http://localhost:5126/apis/player_positions";
 
-export async function fetchPlayers(): Promise<Player[]> {
+export async function fetchPlayerPositions(): Promise<PlayerPosition[]> {
   const promise = await fetch(apiUrl);
   return promise.json();
 }

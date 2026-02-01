@@ -11,21 +11,107 @@
 }
 
 .point{
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
+    border: 1px solid;
 }
 
 .map-point{
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     
     border: 1px solid rgb(119, 187, 16);
     background-color: greenyellow;
 }
 
+.character-1{
+    background-color: #FFF56E;
+    border-color: #BA782F;
+}
+
+.character-2{
+    background-color: #FAC6C3;
+
+    border-top-color: #D6DE22;
+    border-bottom-color: #D6DE22;
+
+    border-left-color: #B292C4;
+    border-right-color: #B292C4;
+}
+
+.character-3{
+    background-color: #D1E9E1;
+    border-color: #CD981B;
+}
+
+.character-4{
+    background-color: #CD981B;
+    border-color: #B292C4;
+}
+
+.character-5{
+    background-color: #FFFFFF;
+
+    border-top-color: #D64438;
+    border-bottom-color: #D64438;
+
+    border-left-color: #1569A3;
+    border-right-color: #1569A3;
+}
+
+.character-6{
+    background-color: #EC4D38;
+
+    border-top-color: #A4D9F0;
+    border-left-color: #A4D9F0;
+    border-right-color: #A4D9F0;
+
+    border-bottom-color: #768DB7;
+}
+
+.character-7{
+    background-color: #8BC0BE;
+    border-color: #00703A;
+}
+
+.character-8{
+    background-color: #FED90F;
+
+    border-top-color: #D0D0D0;
+    border-left-color: #D0D0D0;
+    border-right-color: #D0D0D0;
+
+    border-bottom-color: #70D1FE;
+}
+
+.character-9{
+    background-color: #FED90F;
+    border-color: #daf390;
+}
+
+.character-10{
+    background-color: #FED41D;
+
+    border-top-color: #F14E28;
+    border-left-color: #F14E28;
+    border-right-color: #F14E28;
+
+    border-bottom-color: #009DDC;
+}
+
+.character-11{
+    background-color: #FED41D;
+    border-color: #F14E28;
+}
+
+.character-12{
+    background-color: #FED41D;
+    border-color: #009DDC;
+}
+
 .player-point{
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
 
     border: 1px solid rgb(187, 133, 16);
     background-color: rgb(234, 255, 47);

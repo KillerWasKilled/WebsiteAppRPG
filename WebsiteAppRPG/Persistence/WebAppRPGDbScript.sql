@@ -96,6 +96,7 @@ VALUES
 ('Patrick Star'),
 ('Squidward Tentacles'),
 ('Sandy Cheeks'),
+('Sandy Cheeks (Suited)'),
 ('Eugene Krabs'),
 ('Sheldon Plankton'),
 ('Homer Simpson'),
@@ -107,7 +108,7 @@ GO
 
 INSERT INTO Maps (Name, Width, Height)
 VALUES
-('Hub', 75, 75);
+('Hub', 50, 50);
 
 INSERT INTO MapsBarriers(MapID, PositionX, PositionY)
 VALUES
@@ -116,7 +117,7 @@ GO
 
 INSERT INTO Players (Email, Name, Password, CharacterID)
 VALUES
-('fabrysamuel@sssvt.cz', 'KillerPlaying', '123456Ab', 1);
+('fabrysamuel@sssvt.cz', 'KillerPlaying', '123456Ab', 10);
 GO
 
 INSERT INTO PlayerPositions (PlayerID, MapID, PositionX, PositionY)
