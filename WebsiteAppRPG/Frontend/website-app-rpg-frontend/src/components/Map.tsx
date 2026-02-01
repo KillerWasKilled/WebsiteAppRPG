@@ -67,6 +67,7 @@ export default function GameMap() {
 
     return () => window.removeEventListener("keydown", handleUserInput);
 
+
   }, [maps]);
 
   if (maps.length === 0) {
@@ -97,22 +98,26 @@ export default function GameMap() {
           
           <div className="map-row" key={lineIndex}>
           
-            {lastMapWidth.map((_, columnIndex) => (
+            {lastMapWidth.map((_, columnIndex) => {
+
+              const playerExists = players.some((player, playerIndex, players) => 
+                player.positionX === columnIndex && player.positionY === lineIndex);
+
+              return(
+                <span className= {playerExists ? "point player-point" : "point map-point"}  key={columnIndex}>
+                </span>
+              )
 
               /*
-              <span className={columnIndex === playerPosition.x && lineIndex === playerPosition.y ? "point player-point" : "point map-point"}  key={columnIndex}>
-              </span>
-              */
-
-              <span className={columnIndex === playerPosition.x && lineIndex === playerPosition.y ? "point player-point" : "point map-point"}  key={columnIndex}>
-              </span>
-            
-            ))}
+              players.map((player, playerIndex) => (
+                <span className= {player.positionX == playerPosition.x && player.positionY == playerPosition.y  ? "point player-point" : "point map-point"}  key={columnIndex}>
+                </span>
+              ))*/
+            })}
           
           </div>
         
         ))}
-
       </div>
     );
   }
