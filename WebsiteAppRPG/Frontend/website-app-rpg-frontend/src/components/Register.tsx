@@ -14,7 +14,7 @@ export default function Register() {
                 <thead>
                     <tr>
                         <th>
-                            <h1>We are waiting 4 you</h1>
+                            <h1 className="form-text">We are waiting 4 you</h1>
                         </th>
                     </tr>
                 </thead>
@@ -22,7 +22,7 @@ export default function Register() {
                     <tr>
                         <td>
                             <label htmlFor="">
-                                <div>Email: </div>
+                                <div className="form-text">Email: </div>
                                 <input type="email" placeholder="john_doe@example.com" />
                             </label>
                         </td>
@@ -31,7 +31,7 @@ export default function Register() {
                     <tr>
                         <td>
                             <label htmlFor="">
-                                <div>Username: </div>
+                                <div className="form-text">Username: </div>
                                 <input type="text" placeholder="johnDoe123" maxLength={50} />
                             </label>
                         </td>
@@ -40,7 +40,7 @@ export default function Register() {
                     <tr>
                         <td>
                             <label htmlFor="">
-                                <div>Password: </div>
+                                <div className="form-text">Password: </div>
                                 <input type="password" placeholder="123456Ab" />
                             </label>
                         </td>
@@ -48,7 +48,7 @@ export default function Register() {
 
                     <tr>
                         <td>
-                            <button type="button" onClick={handleGame}>Register</button>
+                            <button className="const-style" type="button" onClick={handleGame}>Register</button>
                         </td>
                     </tr>
                 </tbody>

@@ -20,7 +20,7 @@ export default function Login() {
                 <thead>
                     <tr>
                         <th>
-                            <h1>We are waiting 4 you</h1>
+                            <h1 className="form-text">We are waiting 4 you</h1>
                         </th>
                     </tr>
                 </thead>
@@ -28,7 +28,7 @@ export default function Login() {
                     <tr>
                         <td>
                             <label htmlFor="">
-                                <div>Email: </div>
+                                <div className="form-text">Email: </div>
                                 <input type="email" placeholder="john_doe@example.com" />
                             </label>
                         </td>
@@ -37,7 +37,7 @@ export default function Login() {
                     <tr>
                         <td>
                             <label htmlFor="">
-                                <div>Password: </div>
+                                <div className="form-text">Password: </div>
                                 <input type="password" placeholder="123456Ab" />
                             </label>
                         </td>
@@ -45,7 +45,7 @@ export default function Login() {
 
                     <tr>
                         <td>
-                            <button type="button" onClick={handleGame}>Login</button>
+                            <button className="const-style" type="button" onClick={handleGame}>Login</button>
                         </td>
                     </tr>
                 </tbody>
@@ -53,7 +53,7 @@ export default function Login() {
                 <tfoot>
                     <tr>
                         <td>
-                            <div>Don't have an account yet? <strong onClick={handleRegister}>Register Here</strong></div>
+                            <div className="form-text">Don't have an account yet? <a onClick={handleRegister}>Register Here</a></div>
                         </td>
                     </tr>
                 </tfoot>
