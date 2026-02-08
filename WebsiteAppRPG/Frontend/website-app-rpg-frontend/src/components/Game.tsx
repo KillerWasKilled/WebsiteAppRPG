@@ -2,7 +2,7 @@ import { useEffect, /*useRef,*/ useState } from "react";
 
 import { Player } from "../models/player";
 
-import { fetchPlayers } from "../api/playerApi";
+import { fetchPlayers } from "../apis/playerApi";
 
 export default function Game() {
   const [players, setPlayers] = useState<Player[]>([]);
@@ -17,7 +17,7 @@ export default function Game() {
     <ul>
       {players.map(player => (
         <li>
-          {`${player.playerID} | ${player.email} | ${player.name} | ${player.password}`}
+          {`${player.playerId} | ${player.email} | ${player.name} | ${player.password}`}
         </li>
       ))}
     </ul>

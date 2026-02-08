@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace WebsiteAppRPG.Core.Entities
 {
@@ -8,10 +9,12 @@ namespace WebsiteAppRPG.Core.Entities
     {
         [Key]
         [Column("MapBarrierID")]
+        [JsonPropertyName("mapBarrierId")]
         public int MapBarrierID { get; set; }
 
         [ForeignKey("MapID")]
         [Column("MapID")]
+        [JsonPropertyName("mapId")]
         public int MapID { get; set; }
 
         [Column("PositionX")]
@@ -25,9 +28,8 @@ namespace WebsiteAppRPG.Core.Entities
             
         }
 
-        public MapBarrier(int mapBarrierId, int mapId, int positionX, int positionY)
+        public MapBarrier(int mapId, int positionX, int positionY)
         {
-            MapBarrierID = mapBarrierId;
             MapID = mapId;
             PositionX = positionX;
             PositionY = positionY;

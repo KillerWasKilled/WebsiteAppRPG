@@ -1,6 +1,12 @@
-
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using System.Text.Json;
 using WebsiteAppRPG.Application;
+using WebsiteAppRPG.Infrastructure;
+using WebsiteAppRPG.Persistence;
+using WebsiteAppRPG.WebApi;
+using System.Text;
 
 namespace WebsiteAppRPG
 {
@@ -17,7 +23,7 @@ namespace WebsiteAppRPG
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
 
-            // Pøidej CORS
+            // Pøudá CORS podporu pro React na localhost
             builder.Services.AddCors(options =>
             {
                 options.AddDefaultPolicy(policy =>
@@ -25,6 +31,26 @@ namespace WebsiteAppRPG
                           .AllowAnyMethod()
                           .AllowAnyHeader());
             });
+
+            builder.Services.AddSingleton<ApplicationDbContext>();
+            builder.Services.AddSingleton<PasswordHasher<string>>();
+            builder.Services.AddSingleton<TokenProvider>();
+            builder.Services.AddSingleton<LoginPlayer>();
+
+
+            builder.Services.AddAuthorization();
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(o =>
+                {
+                    o.RequireHttpsMetadata = false;
+                    o.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Secret"]!)),
+                        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                        ValidAudience = builder.Configuration["Jwt:Audience"],
+                        ClockSkew = TimeSpan.Zero
+                    };
+                });
 
             var app = builder.Build();
 
@@ -37,6 +63,8 @@ namespace WebsiteAppRPG
             }
 
             // app.UseHttpsRedirection();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

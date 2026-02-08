@@ -8,7 +8,7 @@ export class Player{
 
     public password: string;
 
-    public characterID: number;
+    public characterId: number;
 
     constructor(playerId: number, email: string, name: string, password: string, characterId: number)
     {
@@ -16,6 +16,6 @@ export class Player{
         this.email = email;
         this.name = name;
         this.password = password;
-        this.characterID = characterId;
+        this.characterId = characterId;
     }
 }

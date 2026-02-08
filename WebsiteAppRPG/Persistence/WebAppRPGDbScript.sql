@@ -73,21 +73,32 @@ BEGIN
 END
 GO
 
-/*
-CREATE OR ALTER TRIGGER trg_set_default_player_position
-ON Players
-AFTER INSERT
-AS
+-- NOVINKY
+IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'MapRouters')
 BEGIN
-	DECLARE @new_player_id INT;
-
-	SELECT @new_player_id = PlayerID
-	FROM inserted;
-
-	SELECT @new_player_id;
+	CREATE TABLE MapRouters(
+		MapRouterID INT IDENTITY (1, 1) PRIMARY KEY,
+		MapID INT NOT NULL,
+		EnterPositionX INT NOT NULL,
+		EnterPositionY INT NOT NULL,
+		ExitPositionX INT NOT NULL,
+		ExitPositionY INT NOT NULL,
+		DestinationMapID INT NOT NULL,
+		CONSTRAINT FK_MapEntrance FOREIGN KEY (MapID) REFERENCES Maps (MapID),
+		CONSTRAINT FK_MapDestination FOREIGN KEY (MapID) REFERENCES Maps (MapID)
+	);
 END
 GO
-*/
+
+IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Obstacles')
+BEGIN
+	CREATE TABLE Obstacles(
+		ObstacleID INT IDENTITY (1, 1) PRIMARY KEY,
+		ObstacleName NVARCHAR(150) NOT NULL UNIQUE,
+		IsBreakable BIT NOT NULL
+	);
+END
+GO
 
 
 INSERT INTO Characters (Name)
@@ -108,36 +119,24 @@ GO
 
 INSERT INTO Maps (Name, Width, Height)
 VALUES
-('Hub', 50, 50);
+('Hub', 50, 50),
+('House', 25, 30);
 
 INSERT INTO MapsBarriers(MapID, PositionX, PositionY)
 VALUES
-(1, 0, 0);
+(1, 10, 10),
+(1, 12, 20);
 GO
 
 INSERT INTO Players (Email, Name, Password, CharacterID)
 VALUES
-('fabrysamuel@sssvt.cz', 'KillerPlaying', '123456Ab', 10);
+('fabrysamuel@sssvt.cz', 'KillerPlaying', '123456Ab', 10),
+('humbertoalan@sssvt.cz', 'Henryto', '123456Ab', 5),
+('susenka@sssvt.cz', 'susenka_lul', '123456Ab', 4);
 GO
 
 INSERT INTO PlayerPositions (PlayerID, MapID, PositionX, PositionY)
 VALUES
-(1, 1, 0, 0);
-
-SELECT * FROM Characters;
-
--- Maps
--- MapsBarriers
-/*
-INSERT INTO Players(Email, PlayerName, Password, PositionX, PositionY)
-VALUES
-('DoeJohn@sssvt.cz', 'JohnDoe666', '123456Ab', 0, 0),
-('DoeJane@sssvt.cz', 'JaneDoe666', '123456Ab', 2, 2),
-('SquarepantsSpongebob@sssvt.cz', 'XxX_Spongey_XxX', '123456Ab', 4, 4),
-('SimpsonHomer@hotmail.com', 'FatsoSumo', '123456Ab', 4, 5);
-GO
-
-INSERT INTO Maps (Name, Width, Height, EntranceX, EntranceY, ExitX, ExitY)
-VALUES ('Start', 30, 30, 0, 0, 29, 29);
-GO
-*/
+(1, 1, 0, 0),
+(2, 1, 10, 7),
+(3, 2, 5, 5);

@@ -13,7 +13,6 @@ namespace WebsiteAppRPG.Application.Services.PlayerPositionServices
             _playerPositionUpdateContext = new();
         }
 
-        [HttpPost("/apis/players/{id}")]
         public PlayerPosition UpdatePlayerPosition(int playerId, int positionX, int positionY) 
         {
             PlayerPosition position = _playerPositionUpdateContext.PlayerPositions.Where(p => p.PlayerID == playerId).First();

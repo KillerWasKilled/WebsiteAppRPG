@@ -16,6 +16,8 @@ namespace WebsiteAppRPG.WebApi.Controllers
         private readonly PlayerCreateService _playerCreateService;
         private readonly PlayerReadService _playerReadService;
 
+        public record NewPlayerRequest(string Email, string Name, string Password);
+
         public PlayerController()
         {
             _gameService = new();
@@ -23,11 +25,11 @@ namespace WebsiteAppRPG.WebApi.Controllers
             _playerReadService = new();
         }
 
-        [HttpPost]
-        public IActionResult CreatePlayer(/*[FromBody] PlayerCreateRequest request */)
+        [HttpPost("/apis/players")]
+        public IActionResult CreatePlayer([FromBody] NewPlayerRequest request)
         {
-            // return Ok(_playerCreateService.CreatePlayerPosition());
-            return Ok();
+            _playerCreateService.CreatePlayer(request.Email, request.Name, request.Password);
+            return Ok(_playerReadService.GetPlayers().Last());
         }
 
         [HttpGet]

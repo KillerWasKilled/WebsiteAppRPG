@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace WebsiteAppRPG.Core.Entities
 {
@@ -8,6 +9,7 @@ namespace WebsiteAppRPG.Core.Entities
     {
         [Key]
         [Column("CharacterID")]
+        [JsonPropertyName("characterId")]
         public int CharacterID { get; set; }
 
         [Column("Name")]
@@ -18,9 +20,8 @@ namespace WebsiteAppRPG.Core.Entities
             
         }
 
-        public Character(int characterId, string name)
+        public Character(string name)
         {
-            CharacterID = characterId;
             Name = name;
         }
     }

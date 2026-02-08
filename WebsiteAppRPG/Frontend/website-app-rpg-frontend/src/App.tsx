@@ -6,9 +6,9 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import './App.css'
 
-import Login from "./components/Login";
-import Register from "./components/Register";
-import GameMap from "./components/Map";
+import Login from "./components/form-stuff/Login";
+import Register from "./components/form-stuff/Register";
+import GameMap from "./components/map-stuff/Map";
 
 export default function App() {
   // const [count, setCount] = useState(0)
@@ -24,3 +24,6 @@ export default function App() {
     </BrowserRouter>
   )
 }
+
+
+// <Route path="/register" element={<Register />} />

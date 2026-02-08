@@ -1,0 +1,113 @@
+
+import { useNavigate } from "react-router-dom";
+import "../form-stuff/form.css"
+
+import { Player } from "../../models/player";
+import { fetchPlayers, createPlayer } from "../../apis/playerApi";
+
+export default function Register() {
+    const navigateTo = useNavigate();
+
+    const handleRegister = async () => {
+        const emailRegisterInput = document.querySelector<HTMLInputElement>("#email-register-input");
+        const usernameRegisterInput = document.querySelector<HTMLInputElement>("#username-register-input");
+        const passwordRegisterInput = document.querySelector<HTMLInputElement>("#password-register-input");
+
+        const error = document.querySelector<HTMLInputElement>("#error");
+        
+        let data = await fetchPlayers();
+
+        let emailAndUsernameIsUnique: boolean = true;
+
+        if (emailRegisterInput != null && usernameRegisterInput !== null && error !== null && passwordRegisterInput !== null) {
+            data.forEach((player) => {
+                if (player.email === String(emailRegisterInput.value) || player.name === String(usernameRegisterInput.value)) {
+                    emailAndUsernameIsUnique = false;
+                }
+            });
+
+            if (String(emailRegisterInput.value).trim().length === 0 || String(usernameRegisterInput.value).trim().length === 0) {
+                error.innerText = "Email or Username is not written!";
+                return;
+            }
+
+            if (!emailAndUsernameIsUnique) {
+                error.innerText = "Email or Username is already taken!";
+                return;
+            }
+
+            if (String(passwordRegisterInput.value).trim().length === 0) {
+                error.innerText = "Password is required for your own safety!";
+                return;
+            }
+
+            const newPlayer: Player = await createPlayer(String(emailRegisterInput.value), String(usernameRegisterInput.value), String(passwordRegisterInput.value));
+            navigateTo("/game", { state: newPlayer });
+        }
+    }
+
+    const handleLogin = () => {
+        navigateTo("/login");
+    }
+
+    return (
+        <form action="" method="">
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            <h1 className="form-text">We are waiting 4 you</h1>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <label htmlFor="">
+                                <div className="form-text">Email: </div>
+                                <input id="email-register-input" type="email" placeholder="john_doe@example.com" />
+                            </label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label htmlFor="">
+                                <div className="form-text">Username: </div>
+                                <input id="username-register-input" type="text" placeholder="johnDoe123" maxLength={50} />
+                            </label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label htmlFor="">
+                                <div className="form-text">Password: </div>
+                                <input id="password-register-input" type="password" placeholder="123456Ab" />
+                            </label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div id="error"></div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <button className="const-style" type="button" onClick={handleRegister}>Register</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div>already have an account? <a onClick={handleLogin}>Login!</a></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    
+    );
+}

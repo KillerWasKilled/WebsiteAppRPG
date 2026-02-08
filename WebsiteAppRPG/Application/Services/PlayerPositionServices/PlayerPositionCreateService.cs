@@ -1,4 +1,5 @@
-﻿using WebsiteAppRPG.Persistence;
+﻿using WebsiteAppRPG.Core.Entities;
+using WebsiteAppRPG.Persistence;
 
 namespace WebsiteAppRPG.Application.Services.PlayerPositionServices
 {
@@ -12,9 +13,11 @@ namespace WebsiteAppRPG.Application.Services.PlayerPositionServices
             _playerPositionCreateContext = new();
         }
 
-        public void CreatePlayerPosition(int playerId, int positionX, int positionY)
+        public void CreatePlayerPosition(int playerId, int mapId, int positionX, int positionY)
         {
-            int characterId = 1;
+            PlayerPosition position = new(playerId, mapId, positionX, positionY);
+            _playerPositionCreateContext.PlayerPositions.Add(position);
+            _playerPositionCreateContext.SaveChanges();
             return;
         }
     }

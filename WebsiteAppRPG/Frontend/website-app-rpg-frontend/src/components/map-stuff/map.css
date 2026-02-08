@@ -24,6 +24,14 @@
     background-color: greenyellow;
 }
 
+.map-barrier{
+    width: 15px;
+    height: 15px;
+
+    border: 1px solid rgb(155, 35, 35);
+    background-color: red;
+}
+
 .character-1{
     background-color: #FFF56E;
     border-color: #BA782F;

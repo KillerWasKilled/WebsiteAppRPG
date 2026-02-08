@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace WebsiteAppRPG.Core.Entities
 {
@@ -8,14 +9,17 @@ namespace WebsiteAppRPG.Core.Entities
     {
         [Key]
         [Column("PlayerPositionID")]
+        [JsonPropertyName("playerPositionId")]
         public int PlayerPositionID { get; set; }
 
         [ForeignKey("PlayerID")]
         [Column("PlayerID")]
+        [JsonPropertyName("playerId")]
         public int PlayerID { get; set; }
 
         [ForeignKey("MapID")]
         [Column("MapID")]
+        [JsonPropertyName("mapId")]
         public int MapID { get; set; }
 
         [Column("PositionX")]
@@ -29,9 +33,8 @@ namespace WebsiteAppRPG.Core.Entities
             
         }
 
-        public PlayerPosition(int playerPositionId, int playerId, int mapId, int positionX, int positionY)
+        public PlayerPosition(int playerId, int mapId, int positionX, int positionY)
         {
-            PlayerPositionID = playerPositionId;
             PlayerID = playerId;
             MapID = mapId;
             PositionX = positionX;

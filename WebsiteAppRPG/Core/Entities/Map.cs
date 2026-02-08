@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace WebsiteAppRPG.Core.Entities
 {
@@ -9,6 +10,7 @@ namespace WebsiteAppRPG.Core.Entities
     {
         [Key]
         [Column("MapID")]
+        [JsonPropertyName("mapId")]
         public int MapId { get; set; }
 
         [Column("Name")]
