@@ -61,9 +61,11 @@ export default function GameMap() {
         function moveAround(e: KeyboardEvent) {
             e.preventDefault();
 
-            if (!map || !playerPosition || !player || !localBarriers) {
+            if (!map || !playerPosition || !player || localBarriers.length === 0) {
                 return;
             }
+
+            console.log(e.key);
 
             if (e.key === "ArrowLeft" || e.key === "a") {
 
@@ -143,7 +145,7 @@ export default function GameMap() {
                         playerPosition.positionY
                     ));
 
-                    updatePlayerPosition(playerPosition.playerId, positionX, playerPosition.positionY);
+                    updatePlayerPosition(playerPosition.playerId, positionX, playerPosition.positionY); 
                 }
             }
 
@@ -172,6 +174,7 @@ export default function GameMap() {
         
     }, [map]);
 
+    console.log(map, localBarriers, player, playerPosition);
     if (!map || !playerPosition || localBarriers.length === 0) {
         return <div>Waiting for data to be loaded 😑</div>
     }

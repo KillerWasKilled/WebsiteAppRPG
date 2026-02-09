@@ -125,7 +125,8 @@ VALUES
 INSERT INTO MapsBarriers(MapID, PositionX, PositionY)
 VALUES
 (1, 10, 10),
-(1, 12, 20);
+(1, 12, 20),
+(2, 10, 19);
 GO
 
 INSERT INTO Players (Email, Name, Password, CharacterID)
@@ -140,3 +141,9 @@ VALUES
 (1, 1, 0, 0),
 (2, 1, 10, 7),
 (3, 2, 5, 5);
+GO
+
+INSERT INTO MapRouters (MapID, EnterPositionX, EnterPositionY, ExitPositionX, ExitPositionY, DestinationMapID)
+VALUES
+(1, 49, 49, 0, 0, 2);
+GO
