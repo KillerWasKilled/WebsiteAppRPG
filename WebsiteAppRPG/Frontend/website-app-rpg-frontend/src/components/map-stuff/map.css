@@ -32,6 +32,13 @@
     background-color: red;
 }
 
+.map-router{
+    width: 15px;
+    height: 15px;
+    border: 1px solid black;
+    background-color: rgb(32, 32, 32);
+}
+
 .character-1{
     background-color: #FFF56E;
     border-color: #BA782F;

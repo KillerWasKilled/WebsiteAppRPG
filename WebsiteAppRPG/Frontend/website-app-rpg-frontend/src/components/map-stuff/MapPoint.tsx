@@ -3,25 +3,38 @@ import { Player } from "../../models/player";
 import { PlayerPosition } from "../../models/playerPosition";
 import "./map.css";
 
-import type { MapBarrier } from "../../models/mapBarrier";
+import { MapBarrier } from "../../models/mapBarrier";
+import { MapRouter } from "../../models/mapRouter";
 import "./map.css";
 
 
 
-export default function MapPoint({ width, height, player , playerPosition, localBarriers } : 
-    { width : number, height: number, player: Player, playerPosition: PlayerPosition, localBarriers : MapBarrier[] }) {
+export default function MapPoint({ width, height, player , playerPosition, localBarriers, localRouters } : 
+    { width : number, height: number, player: Player, playerPosition: PlayerPosition, localBarriers : MapBarrier[], localRouters: MapRouter[] }) {
 
     function classHandler(index: number, characterId: string) {
 
         let barrierIsHere: boolean = false;
+        let routerIsHere: boolean = false;
+
         localBarriers.forEach((barrier) => {
             if (barrier.positionX === index && barrier.positionY === height) {
                 barrierIsHere = true;
             }
         });
+
+        localRouters.forEach((router) => {
+            if (router.enterPositionX === index && router.enterPositionY === height) {
+                routerIsHere = true;
+            }
+        });
         
         if (barrierIsHere) {
             return `point map-barrier`;
+        }
+
+        if (routerIsHere) {
+            return `point map-router`;
         }
 
         else if (playerPosition.positionX === index && playerPosition.positionY === height) {

@@ -13,7 +13,7 @@ namespace WebsiteAppRPG.WebApi.Controllers
         private readonly PlayerPositionReadService _playerPositionReadService;
         private readonly PlayerPositionUpdateService _playerPositionUpdateService;
 
-        public record Position(int X, int Y);
+        public record Position(int MapID, int X, int Y);
 
         public PlayerPositionController()
         {
@@ -43,8 +43,9 @@ namespace WebsiteAppRPG.WebApi.Controllers
             {
                 return NotFound(position);
             }
+               
+            position = _playerPositionUpdateService.UpdatePlayerPosition(id, updatedPosition.MapID, updatedPosition.X, updatedPosition.Y);
 
-            _playerPositionUpdateService.UpdatePlayerPosition(id, updatedPosition.X, updatedPosition.Y);
             return Ok(position);
         }
     }

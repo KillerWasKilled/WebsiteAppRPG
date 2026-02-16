@@ -29,7 +29,8 @@ namespace WebsiteAppRPG.Infrastructure
                 [
                     new Claim(JwtRegisteredClaimNames.Sub, player.PlayerID.ToString()),
                     new Claim(JwtRegisteredClaimNames.Email, player.Email),
-                    new Claim(JwtRegisteredClaimNames.UniqueName, player.Name)
+                    new Claim(JwtRegisteredClaimNames.UniqueName, player.Name),
+                    new Claim(JwtRegisteredClaimNames.NameId, player.CharacterID.ToString())
                 ]
                 ),
 

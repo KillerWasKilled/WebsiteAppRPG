@@ -1,49 +1,42 @@
-import { fetchPlayers } from "../../apis/playerApi";
-
 import { useNavigate } from "react-router-dom";
 import "../form-stuff/form.css"
+import { login } from "../../apis/authApi";
+import { useState } from "react";
 
 
 export default function Login() {
 
     const navigateTo = useNavigate();
+    
+    /*const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");*/
+    const [error, setError] = useState("");
 
     const handleLogin = async () => {
         const emailLoginInput = document.querySelector<HTMLInputElement>("#email-login-input");
         const passwordLoginInput = document.querySelector<HTMLInputElement>("#password-login-input");
-
         const error = document.querySelector<HTMLElement>("#error");
+        
+        try {
+            console.log(emailLoginInput!.value, passwordLoginInput!.value)
+            const response = await login(emailLoginInput!.value, passwordLoginInput!.value);
 
-        let playerExists: boolean = false;
-        let playerExistsIndex: number = 0;
-        const response = await fetchPlayers();
-
-        if (emailLoginInput !== null && passwordLoginInput !== null && error !== null) {
-            response.forEach((p, index) => {
-                if (p.email === String(emailLoginInput.value)) {
-                    playerExists = true;
-                    playerExistsIndex = index;
-                }
-            });
-
-            if (!playerExists) {
-                error.innerText = "Player does not exist!";
+            if (!response.token) {
+                error!.innerText = "Chyba!";
+                return;
             }
-                
-            else
-            {
-                const player = response[playerExistsIndex];
 
-                if (player.password === String(passwordLoginInput.value)) {
-                    error.innerText = "";
-                    navigateTo("/game", { state: player });   
-                }
-
-                else {
-                    error.innerText = "Password is either incorrect or wrong!";
-                }               
-            }
+            console.log(response.token);
+            error!.innerText = "";
+            navigateTo("/game");
+        } 
+        
+        catch {
+            console.log("error");
+            setError("Chyba!");
         }
+
     }
 
     // PAST
@@ -52,7 +45,7 @@ export default function Login() {
     };
 
     return (
-        <form action="" method="">
+        <div>
             <table>
                 <thead>
                     <tr>
@@ -74,7 +67,7 @@ export default function Login() {
                         <td>
                             <label htmlFor="">
                                 <strong className="form-text">Email: </strong>
-                                <input id="email-login-input" type="email" placeholder="john_doe@example.com" />
+                                <input id="email-login-input" type="email" placeholder="john_doe@example.com" /> 
                             </label>
                         </td>
                     </tr>
@@ -90,7 +83,7 @@ export default function Login() {
 
                     <tr>
                         <td>
-                            <div id="error"></div>
+                            <div id="error">{error}</div>
                         </td>
                     </tr>
 
@@ -109,6 +102,6 @@ export default function Login() {
                     </tr>
                 </tfoot>
             </table>
-        </form>
+        </div>
     );
 }

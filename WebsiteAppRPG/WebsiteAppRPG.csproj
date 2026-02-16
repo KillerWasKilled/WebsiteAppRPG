@@ -19,7 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\Services\MapRouterServices\" />
     <Folder Include="Application\Services\ObstacleServices\" />
   </ItemGroup>
 

@@ -7,6 +7,7 @@ using WebsiteAppRPG.Infrastructure;
 using WebsiteAppRPG.Persistence;
 using WebsiteAppRPG.WebApi;
 using System.Text;
+using Microsoft.Extensions.Options;
 
 namespace WebsiteAppRPG
 {
@@ -27,9 +28,10 @@ namespace WebsiteAppRPG
             builder.Services.AddCors(options =>
             {
                 options.AddDefaultPolicy(policy =>
-                    policy.AllowAnyOrigin()      // dovolí Reactu na localhost
+                    policy.WithOrigins("http://localhost:5173")      // dovolí Reactu na localhost
                           .AllowAnyMethod()
-                          .AllowAnyHeader());
+                          .AllowAnyHeader()
+                          .AllowCredentials());
             });
 
             builder.Services.AddSingleton<ApplicationDbContext>();
@@ -49,6 +51,15 @@ namespace WebsiteAppRPG
                         ValidIssuer = builder.Configuration["Jwt:Issuer"],
                         ValidAudience = builder.Configuration["Jwt:Audience"],
                         ClockSkew = TimeSpan.Zero
+                    };
+
+                    o.Events = new JwtBearerEvents
+                    {
+                        OnMessageReceived = context =>
+                        {
+                            context.Token = context.Request.Cookies["Jwt"];
+                            return Task.CompletedTask;
+                        }
                     };
                 });
 

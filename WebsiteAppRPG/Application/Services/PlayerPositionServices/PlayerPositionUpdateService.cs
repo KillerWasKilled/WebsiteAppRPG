@@ -25,5 +25,18 @@ namespace WebsiteAppRPG.Application.Services.PlayerPositionServices
             return position;
         }
 
+        public PlayerPosition UpdatePlayerPosition(int playerId, int mapId, int positionX, int positionY)
+        {
+            PlayerPosition position = _playerPositionUpdateContext.PlayerPositions.Where(p => p.PlayerID == playerId).First();
+
+            position.MapID = mapId;
+            position.PositionX = positionX;
+            position.PositionY = positionY;
+
+            _playerPositionUpdateContext.SaveChanges();
+
+            return position;
+        }
+
     }
 }

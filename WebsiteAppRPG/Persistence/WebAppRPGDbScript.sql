@@ -100,6 +100,20 @@ BEGIN
 END
 GO
 
+IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'MapsObstacles')
+BEGIN
+	CREATE TABLE MapsObstacles(
+		MapObstacleID INT IDENTITY (1, 1) PRIMARY KEY,
+		MapID INT NOT NULL,
+		ObstacleID INT NOT NULL,
+		PositionX INT NOT NULL,
+		PositionY INT NOT NULL,
+		CONSTRAINT FK_MapsInstances FOREIGN KEY (MapID) REFERENCES Maps (MapID),
+		CONSTRAINT FK_MapsObstacles FOREIGN KEY (ObstacleID) REFERENCES Obstacles (ObstacleID)
+	);
+END
+GO
+
 
 INSERT INTO Characters (Name)
 VALUES
@@ -145,5 +159,17 @@ GO
 
 INSERT INTO MapRouters (MapID, EnterPositionX, EnterPositionY, ExitPositionX, ExitPositionY, DestinationMapID)
 VALUES
-(1, 49, 49, 0, 0, 2);
+(1, 49, 49, 0, 0, 2),
+(2, 0, 0, 49, 49, 1);
+GO
+
+INSERT INTO Obstacles (ObstacleName, IsBreakable)
+VALUES
+('Tree', 1);
+GO
+
+INSERT INTO MapsObstacles (MapID, ObstacleID, PositionX, PositionY)
+VALUES
+(1, 1, 11, 11),
+(1, 1, 13, 13);
 GO

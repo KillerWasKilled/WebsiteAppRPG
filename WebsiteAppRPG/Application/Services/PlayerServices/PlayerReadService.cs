@@ -17,5 +17,10 @@ namespace WebsiteAppRPG.Application.Services.PlayerServices
             return [.. _playerReadContext.Players];
         }
 
+        public Player? GetPlayerByEmailAndPassword(string email, string password)
+        {
+            return _playerReadContext.Players.Where(p => p.Email == email &&  p.Password == password).FirstOrDefault();
+        }
+
     }
 }

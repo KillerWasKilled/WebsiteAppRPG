@@ -7,10 +7,10 @@ export async function fetchPlayerPositions(): Promise<PlayerPosition[]> {
   return promise.json();
 }
 
-export async function updatePlayerPosition(playerId: number, x: number, y: number) : Promise<void> {
+export async function updatePlayerPosition(playerId: number, mapId: number, x: number, y: number) : Promise<void> {
   await fetch(`http://localhost:5126/apis/players/${playerId}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ x, y })
+    body: JSON.stringify({ mapId, x, y })
   });
 }
