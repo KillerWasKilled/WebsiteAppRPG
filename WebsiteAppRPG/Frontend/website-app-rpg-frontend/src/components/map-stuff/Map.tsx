@@ -107,6 +107,48 @@ export default function GameMap() {
                 blockedPart = localBarriers.find(b => b.positionX === playerPosition.positionX - 1 && b.positionY === playerPosition.positionY);
                 routerPart = localRouters.find(r => r.enterPositionX === playerPosition.positionX - 1 && r.enterPositionY === playerPosition.positionY);
 
+                if (playerPosition.positionX - 1 >= 0) {
+                    if (blockedPart !== undefined) {
+                        return;
+                    }
+
+                    else if (routerPart !== undefined) {
+                        console.log(routerPart.destinationMapId);
+
+                        let newMapId = routerPart.destinationMapId;
+                        let newX = routerPart.exitPositionX;
+                        let newY = routerPart.exitPositionY;
+
+                        const newPos = new PlayerPosition(
+                            playerPosition.playerPositionId,
+                            playerPosition.playerId,
+                            newMapId,
+                            newX,
+                            newY
+                        );
+
+                        setPosition(newPos);
+                        await updatePlayerPosition(playerPosition.playerId, newMapId, newX, newY);
+                    }
+
+                    else {
+
+                        let positionX = playerPosition.positionX - 1;
+                        
+                        setPosition(new PlayerPosition(
+                            playerPosition.playerPositionId, 
+                            playerPosition.playerId, 
+                            playerPosition.mapId, 
+                            positionX, 
+                            playerPosition.positionY
+                        ));
+
+                        updatePlayerPosition(playerPosition.playerId, playerPosition.mapId, positionX, playerPosition.positionY);
+
+                    }
+                }
+
+                /*
                 if (playerPosition.positionX - 1 >= 0 && blockedPart === undefined) {
 
                     let positionX = playerPosition.positionX - 1;
@@ -132,13 +174,60 @@ export default function GameMap() {
                     updatePlayerPosition(playerPosition.playerId, routerPart.destinationMapId, routerPart.exitPositionX, routerPart.exitPositionY);
 
                 }
+                */
             }
 
             else if (e.key === "ArrowUp" || e.key === "w") {
 
                 let blockedPart: MapBarrier | undefined;
-                blockedPart = localBarriers.find(b => b.positionX === playerPosition.positionX && b.positionY === playerPosition.positionY - 1);
+                let routerPart: MapRouter | undefined;
 
+                blockedPart = localBarriers.find(b => b.positionX === playerPosition.positionX && b.positionY === playerPosition.positionY - 1);
+                routerPart = localRouters.find(r => r.enterPositionX === playerPosition.positionX && r.enterPositionY === playerPosition.positionY - 1);
+
+                if (playerPosition.positionY - 1 >= 0) {
+                    if (blockedPart !== undefined) {
+                        return;
+                    }
+
+                    else if (routerPart !== undefined) {
+                        console.log(routerPart.destinationMapId);
+
+                        let newMapId = routerPart.destinationMapId;
+                        let newX = routerPart.exitPositionX;
+                        let newY = routerPart.exitPositionY;
+
+                        const newPos = new PlayerPosition(
+                            playerPosition.playerPositionId,
+                            playerPosition.playerId,
+                            newMapId,
+                            newX,
+                            newY
+                        );
+
+                        setPosition(newPos);
+                        await updatePlayerPosition(playerPosition.playerId, newMapId, newX, newY);   
+                    }
+
+                    else {
+
+                        let positionY = playerPosition.positionY - 1;
+                        
+                        setPosition(new PlayerPosition(
+                            playerPosition.playerPositionId, 
+                            playerPosition.playerId, 
+                            playerPosition.mapId, 
+                            playerPosition.positionX, 
+                            positionY
+                        ));
+
+                        updatePlayerPosition(playerPosition.playerId, playerPosition.mapId, playerPosition.positionX, positionY);
+
+
+                    }
+                }
+
+                /*
                 if (playerPosition.positionY - 1 >= 0 && blockedPart === undefined) {
 
                     let positionY = playerPosition.positionY - 1;
@@ -153,6 +242,7 @@ export default function GameMap() {
 
                     updatePlayerPosition(playerPosition.playerId, playerPosition.mapId, playerPosition.positionX, positionY);
                 }
+                */
             }
 
             else if (e.key === "ArrowDown" || e.key === "s") {
@@ -209,8 +299,53 @@ export default function GameMap() {
             else if (e.key === "ArrowRight" || e.key === "d") {
 
                 let blockedPart: MapBarrier | undefined;
+                let routerPart: MapRouter | undefined;
                 blockedPart = localBarriers.find(b => b.positionX === playerPosition.positionX + 1 && b.positionY === playerPosition.positionY);
+                routerPart = localRouters.find(r => r.enterPositionX === playerPosition.positionX + 1 && r.enterPositionY === playerPosition.positionY);
 
+                if (playerPosition.positionX + 1 < map.width) {
+                    if (blockedPart !== undefined) {
+                        return;
+                    }
+
+                    else if (routerPart !== undefined) {
+                        console.log(routerPart.destinationMapId);
+
+                        let newMapId = routerPart.destinationMapId;
+                        let newX = routerPart.exitPositionX;
+                        let newY = routerPart.exitPositionY;
+
+                        const newPos = new PlayerPosition(
+                            playerPosition.playerPositionId,
+                            playerPosition.playerId,
+                            newMapId,
+                            newX,
+                            newY
+                        );
+
+                        setPosition(newPos);
+                        await updatePlayerPosition(playerPosition.playerId, newMapId, newX, newY);
+                        
+                    }
+
+                    else {
+
+                        let positionX = playerPosition.positionX + 1;
+                        
+                        setPosition(new PlayerPosition(
+                            playerPosition.playerPositionId, 
+                            playerPosition.playerId, 
+                            playerPosition.mapId, 
+                            positionX, 
+                            playerPosition.positionY
+                        ));
+
+                        updatePlayerPosition(playerPosition.playerId, playerPosition.mapId, positionX, playerPosition.positionY);
+
+                    }
+                }
+
+                /*
                 if (playerPosition.positionX + 1 < map.width && blockedPart === undefined) {
 
                     let positionX = playerPosition.positionX + 1;
@@ -224,6 +359,7 @@ export default function GameMap() {
 
                     updatePlayerPosition(playerPosition.playerId, playerPosition.mapId, positionX, playerPosition.positionY); 
                 }
+                */
             }
         }
 

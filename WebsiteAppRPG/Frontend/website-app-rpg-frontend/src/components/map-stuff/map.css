@@ -39,6 +39,14 @@
     background-color: rgb(32, 32, 32);
 }
 
+.map-obstacle{
+    width: 15px;
+    height: 15px;
+
+    border: 1px solid rgb(18, 61, 18);
+    background-color: green;
+}
+
 .character-1{
     background-color: #FFF56E;
     border-color: #BA782F;

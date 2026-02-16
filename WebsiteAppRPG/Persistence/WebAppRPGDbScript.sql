@@ -159,8 +159,8 @@ GO
 
 INSERT INTO MapRouters (MapID, EnterPositionX, EnterPositionY, ExitPositionX, ExitPositionY, DestinationMapID)
 VALUES
-(1, 49, 49, 0, 0, 2),
-(2, 0, 0, 49, 49, 1);
+(1, 49, 49, 11, 11, 2),
+(2, 10, 10, 48, 48, 1);
 GO
 
 INSERT INTO Obstacles (ObstacleName, IsBreakable)

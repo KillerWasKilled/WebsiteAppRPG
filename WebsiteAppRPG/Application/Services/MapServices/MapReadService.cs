@@ -12,9 +12,9 @@ namespace WebsiteAppRPG.Application.Services.MapServices
             _mapReadContext = new();
         }
 
-        public List<Character> GetCharacters()
+        public List<Map> GetMaps()
         {
-            return [.. _mapReadContext.Characters];
+            return [.. _mapReadContext.Maps];
         }
     }
 }

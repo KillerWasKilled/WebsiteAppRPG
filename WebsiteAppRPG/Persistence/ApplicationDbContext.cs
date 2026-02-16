@@ -17,13 +17,15 @@ namespace WebsiteAppRPG.Persistence
 
         public DbSet<MapRouter> MapRouters { get; set; }
 
+        public DbSet<MapObstacle> MapObstacles { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string homeConnectionString = "Server=SAMUEL;Database=WebAppRPGDb;Trusted_Connection=True;TrustServerCertificate=True;";
-            // string schoolConnectionString = "Server=L107PC03;Database=WebAppRPGDb;Trusted_Connection=True;TrustServerCertificate=True;";
+            // string homeConnectionString = "Server=SAMUEL;Database=WebAppRPGDb;Trusted_Connection=True;TrustServerCertificate=True;";
+            string schoolConnectionString = "Server=L107PC03;Database=WebAppRPGDb;Trusted_Connection=True;TrustServerCertificate=True;";
 
-            optionsBuilder.UseSqlServer(homeConnectionString);
-            //optionsBuilder.UseSqlServer(schoolConnectionString);
+            // optionsBuilder.UseSqlServer(homeConnectionString);
+            optionsBuilder.UseSqlServer(schoolConnectionString);
         }
 
     }
