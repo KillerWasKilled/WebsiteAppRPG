@@ -1,6 +1,8 @@
-
 import { useNavigate } from "react-router-dom";
 import "../form-stuff/form.css"
+
+import FormLabel from "./FormLabel";
+import FormButton from "./FormButton";
 
 import { Player } from "../../models/player";
 import { fetchPlayers, createPlayer } from "../../apis/playerApi";
@@ -61,32 +63,11 @@ export default function Register() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>
-                            <label htmlFor="">
-                                <div className="form-text">Email: </div>
-                                <input id="email-register-input" type="email" placeholder="john_doe@example.com" />
-                            </label>
-                        </td>
-                    </tr>
+                    <FormLabel labelTitle="Email" inputId="email-register-input" inputType="email" inputPlaceholder="johndoe@example.com" maxLength={undefined} />
+                            
+                    <FormLabel labelTitle="Username" inputId="username-register-input" inputType="text" inputPlaceholder="CrazyJoe22" maxLength={50} />
 
-                    <tr>
-                        <td>
-                            <label htmlFor="">
-                                <div className="form-text">Username: </div>
-                                <input id="username-register-input" type="text" placeholder="johnDoe123" maxLength={50} />
-                            </label>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label htmlFor="">
-                                <div className="form-text">Password: </div>
-                                <input id="password-register-input" type="password" placeholder="123456Ab" />
-                            </label>
-                        </td>
-                    </tr>
+                    <FormLabel labelTitle="Password" inputId="password-register-input" inputType="password" inputPlaceholder="123456Ab" maxLength={undefined} />
 
                     <tr>
                         <td>
@@ -94,11 +75,7 @@ export default function Register() {
                         </td>
                     </tr>
 
-                    <tr>
-                        <td>
-                            <button className="const-style" type="button" onClick={handleRegister}>Register</button>
-                        </td>
-                    </tr>
+                    <FormButton buttonText="Register" btnFunction={handleRegister} />
 
                     <tr>
                         <td>

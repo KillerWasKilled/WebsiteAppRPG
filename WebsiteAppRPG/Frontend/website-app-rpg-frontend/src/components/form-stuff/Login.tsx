@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import "../form-stuff/form.css"
 import { login } from "../../apis/authApi";
 import { useState } from "react";
+import FormLabel from "./FormLabel";
 
 
 export default function Login() {
@@ -63,23 +64,9 @@ export default function Login() {
                 </thead>
                 
                 <tbody>
-                    <tr>
-                        <td>
-                            <label htmlFor="">
-                                <strong className="form-text">Email: </strong>
-                                <input id="email-login-input" type="email" placeholder="john_doe@example.com" /> 
-                            </label>
-                        </td>
-                    </tr>
+                    <FormLabel labelTitle="Email" inputId="email-login-input" inputType="email" inputPlaceholder="johndoe@example.com" maxLength={undefined} />
 
-                    <tr>
-                        <td>
-                            <label htmlFor="">
-                                <strong className="form-text">Password: </strong>
-                                <input id="password-login-input" type="password" placeholder="123456Ab" />
-                            </label>
-                        </td>
-                    </tr>
+                    <FormLabel labelTitle="Password" inputId="password-login-input" inputType="password" inputPlaceholder="123456Ab" maxLength={undefined} />
 
                     <tr>
                         <td>

@@ -190,19 +190,3 @@ INSERT INTO MapsObstacles (MapID, ObstacleID, PositionX, PositionY)
 VALUES
 (2, 2, 14, 9);
 GO
-
-
-/*
-INSERT INTO Players (Email, Name, Password, CharacterID)
-VALUES
-('fabrysamuel@sssvt.cz', 'KillerPlaying', '123456Ab', 10),
-('humbertoalan@sssvt.cz', 'Henryto', '123456Ab', 5),
-('susenka@sssvt.cz', 'susenka_lul', '123456Ab', 4);
-GO
-
-INSERT INTO PlayerPositions (PlayerID, MapID, PositionX, PositionY)
-VALUES
-(1, 1, 0, 0),
-(2, 1, 10, 7),
-(3, 2, 5, 5);
-GO
