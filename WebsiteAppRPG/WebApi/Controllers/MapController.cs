@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebsiteAppRPG.Application;
-using WebsiteAppRPG.Application.Services.MapServices;
+using WebsiteAppRPG.Application.CRUD.MapOperations;
 
 namespace WebsiteAppRPG.WebApi.Controllers
 {
@@ -8,19 +8,17 @@ namespace WebsiteAppRPG.WebApi.Controllers
     [Route("apis/maps")]
     public class MapController : ControllerBase
     {
-        private readonly GameService _gameService;
-        private readonly MapReadService _mapReadService;
+        private readonly MapReader _mapReader;
 
         public MapController()
         {
-            _gameService = new();
-            _mapReadService = new();
+            _mapReader = new();
         }
 
         [HttpGet]
         public IActionResult GetMaps()
         {
-            return Ok(_mapReadService.GetMaps());
+            return Ok(_mapReader.GetMaps());
         }
     }
 }

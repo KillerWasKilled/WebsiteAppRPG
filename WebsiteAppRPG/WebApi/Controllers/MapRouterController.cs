@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WebsiteAppRPG.Application.Services.MapRouterServices;
+using WebsiteAppRPG.Application.CRUD.MapRouterOperations;
 
 namespace WebsiteAppRPG.WebApi.Controllers
 {

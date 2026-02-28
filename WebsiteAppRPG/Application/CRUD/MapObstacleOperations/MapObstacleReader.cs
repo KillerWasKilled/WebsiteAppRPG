@@ -1,20 +1,20 @@
 ﻿using WebsiteAppRPG.Core.Entities;
 using WebsiteAppRPG.Persistence;
 
-namespace WebsiteAppRPG.Application.Services.ObstacleServices
+namespace WebsiteAppRPG.Application.CRUD.MapObstacleOperations
 {
     public class MapObstacleReader
     {
-        private readonly ApplicationDbContext _mapObstacleReadContext;
+        private readonly ApplicationDbContext _mapObstacleContext;
 
         public MapObstacleReader()
         {
-            _mapObstacleReadContext = new();
+            _mapObstacleContext = new();
         }
 
         public List<MapObstacle> GetMapObstacles()
         {
-            return [.. _mapObstacleReadContext.MapObstacles];
+            return [.. _mapObstacleContext.MapObstacles];
         }
     }
 }

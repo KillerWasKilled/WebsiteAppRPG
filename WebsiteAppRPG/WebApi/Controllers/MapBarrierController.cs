@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WebsiteAppRPG.Application.Services.PlayerServices;
 using WebsiteAppRPG.Application;
-using WebsiteAppRPG.Application.Services.MapBarrierServices;
+using WebsiteAppRPG.Application.CRUD.MapBarrierOperations;
 
 namespace WebsiteAppRPG.WebApi.Controllers
 {
@@ -9,17 +8,17 @@ namespace WebsiteAppRPG.WebApi.Controllers
     [Route("apis/map_barriers")]
     public class MapBarrierController : ControllerBase
     {
-        private readonly MapBarrierReadService _mapBarrierReadService;
+        private readonly MapBarrierReader _mapBarrierReader;
 
         public MapBarrierController()
         {
-            _mapBarrierReadService = new();
+            _mapBarrierReader = new();
         }
 
         [HttpGet]
         public IActionResult GetMapBarriers()
         {
-            return Ok(_mapBarrierReadService.GetMapBarriers());
+            return Ok(_mapBarrierReader.GetMapBarriers());
         }
 
     }

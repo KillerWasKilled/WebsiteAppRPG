@@ -36,13 +36,24 @@ BEGIN
 END
 GO
 
+IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Biomes')
+BEGIN
+	CREATE TABLE Biomes(
+		BiomeID INT IDENTITY (1, 1) PRIMARY KEY,
+		BiomeName NVARCHAR(75) NOT NULL
+	);
+END
+GO
+
 IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Maps')
 BEGIN
 	CREATE TABLE Maps(
 		MapID INT IDENTITY (1, 1) PRIMARY KEY,
 		Name NVARCHAR(75) NOT NULL,
 		Width INT NOT NULL,
-		Height INT NOT NULL
+		Height INT NOT NULL,
+		BiomeID INT NOT NULL,
+		CONSTRAINT FK_MapsBiomes FOREIGN KEY (BiomeID) REFERENCES Biomes (BiomeID)
 	);
 END
 GO
@@ -73,7 +84,6 @@ BEGIN
 END
 GO
 
--- NOVINKY
 IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'MapRouters')
 BEGIN
 	CREATE TABLE MapRouters(
@@ -85,7 +95,7 @@ BEGIN
 		ExitPositionY INT NOT NULL,
 		DestinationMapID INT NOT NULL,
 		CONSTRAINT FK_MapEntrance FOREIGN KEY (MapID) REFERENCES Maps (MapID),
-		CONSTRAINT FK_MapDestination FOREIGN KEY (MapID) REFERENCES Maps (MapID)
+		CONSTRAINT FK_MapDestination FOREIGN KEY (DestinationMapID) REFERENCES Maps (MapID)
 	);
 END
 GO
@@ -115,6 +125,8 @@ END
 GO
 
 
+
+-- DATA INSERT
 INSERT INTO Characters (Name)
 VALUES
 ('Spongebob Squarepants'),
@@ -131,18 +143,56 @@ VALUES
 ('Maggie Simpson');
 GO
 
-INSERT INTO Maps (Name, Width, Height)
+INSERT INTO Biomes (BiomeName)
 VALUES
-('Hub', 50, 50),
-('House', 25, 30);
-
-INSERT INTO MapsBarriers(MapID, PositionX, PositionY)
-VALUES
-(1, 10, 10),
-(1, 12, 20),
-(2, 10, 19);
+('Plains'),
+('Forest'),
+('Desert'),
+('Snow Plains'),
+('Snow Forest'),
+('Jungle'),
+('Ocean'),
+('Crimson Forest'),
+('Halloween Plains'),
+('Halloween Forest');
 GO
 
+INSERT INTO Obstacles (ObstacleName, IsBreakable)
+VALUES
+('Tree', 0),
+('Box', 1),
+('Rock', 1);
+GO
+
+INSERT INTO Maps (Name, Width, Height, BiomeID)
+VALUES
+('Main', 30, 30, 1),
+('Tutorial', 30, 20, 1),
+('', 30, 20, 3),
+('', 30, 20, 4),
+('', 30, 20, 8);
+GO
+
+INSERT INTO MapRouters (MapID, EnterPositionX, EnterPositionY, ExitPositionX, ExitPositionY, DestinationMapID)
+VALUES
+(1, 14, 0, 14, 19, 2),
+(1, 15, 0, 15, 19, 2);
+GO
+
+INSERT INTO MapsBarriers (MapID, PositionX, PositionY)
+VALUES
+(2, 0, 0),
+(2, 1, 0),
+(2, 0, 1);
+GO
+
+INSERT INTO MapsObstacles (MapID, ObstacleID, PositionX, PositionY)
+VALUES
+(2, 2, 14, 9);
+GO
+
+
+/*
 INSERT INTO Players (Email, Name, Password, CharacterID)
 VALUES
 ('fabrysamuel@sssvt.cz', 'KillerPlaying', '123456Ab', 10),
@@ -155,21 +205,4 @@ VALUES
 (1, 1, 0, 0),
 (2, 1, 10, 7),
 (3, 2, 5, 5);
-GO
-
-INSERT INTO MapRouters (MapID, EnterPositionX, EnterPositionY, ExitPositionX, ExitPositionY, DestinationMapID)
-VALUES
-(1, 49, 49, 11, 11, 2),
-(2, 10, 10, 48, 48, 1);
-GO
-
-INSERT INTO Obstacles (ObstacleName, IsBreakable)
-VALUES
-('Tree', 1);
-GO
-
-INSERT INTO MapsObstacles (MapID, ObstacleID, PositionX, PositionY)
-VALUES
-(1, 1, 11, 11),
-(1, 1, 13, 13);
 GO

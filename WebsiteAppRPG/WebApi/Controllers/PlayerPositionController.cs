@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebsiteAppRPG.Application;
-using WebsiteAppRPG.Application.Services.PlayerPositionServices;
+using WebsiteAppRPG.Application.CRUD.PlayerPositionOperations;
 using WebsiteAppRPG.Core.Entities;
 
 namespace WebsiteAppRPG.WebApi.Controllers
@@ -9,33 +9,34 @@ namespace WebsiteAppRPG.WebApi.Controllers
     [Route("apis/player_positions")]
     public class PlayerPositionController : ControllerBase
     {
-        private readonly PlayerPositionCreateService playerPositionCreateService;
-        private readonly PlayerPositionReadService _playerPositionReadService;
-        private readonly PlayerPositionUpdateService _playerPositionUpdateService;
+        private readonly PlayerPositionCreator _playerPositionCreator;
+        private readonly PlayerPositionReader _playerPositionReader;
+        private readonly PlayerPositionUpdater _playerPositionUpdater;
 
         public record Position(int MapID, int X, int Y);
 
         public PlayerPositionController()
         {
-            _playerPositionReadService = new();
-            _playerPositionUpdateService = new();
+            _playerPositionCreator = new();
+            _playerPositionReader = new();
+            _playerPositionUpdater = new();
         }
 
         [HttpGet]
         public IActionResult GetPlayerPositions()
         {
-            return Ok(_playerPositionReadService.GetPlayerPositions());
+            return Ok(_playerPositionReader.GetPlayerPositions());
         }
 
         public IActionResult UpdatePlayerPosition(int id, int positionX, int positionY)
         {
-            return Ok(_playerPositionUpdateService.UpdatePlayerPosition(id, positionX, positionY));
+            return Ok(_playerPositionUpdater.UpdatePlayerPosition(id, positionX, positionY));
         }
 
         [HttpPost("/apis/players/{id}")]
         public IActionResult UpdatePlayerPosition(int id, [FromBody] Position updatedPosition)
         {
-            List<PlayerPosition> positions = _playerPositionReadService.GetPlayerPositions();
+            List<PlayerPosition> positions = _playerPositionReader.GetPlayerPositions();
 
             PlayerPosition position = positions.First(x => x.PlayerID == id);
 
@@ -44,7 +45,7 @@ namespace WebsiteAppRPG.WebApi.Controllers
                 return NotFound(position);
             }
                
-            position = _playerPositionUpdateService.UpdatePlayerPosition(id, updatedPosition.MapID, updatedPosition.X, updatedPosition.Y);
+            position = _playerPositionUpdater.UpdatePlayerPosition(id, updatedPosition.MapID, updatedPosition.X, updatedPosition.Y);
 
             return Ok(position);
         }

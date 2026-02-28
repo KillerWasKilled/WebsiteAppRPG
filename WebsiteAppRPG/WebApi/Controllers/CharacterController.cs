@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WebsiteAppRPG.Application.Services.CharacterServices;
+using WebsiteAppRPG.Application.CRUD.CharacterOperations;
 using WebsiteAppRPG.Persistence;
 
 namespace WebsiteAppRPG.WebApi.Controllers
@@ -8,17 +8,17 @@ namespace WebsiteAppRPG.WebApi.Controllers
     [Route("apis/characters")]
     public class CharacterController : ControllerBase
     {
-        private readonly CharacterReadService _characterService;
+        private readonly CharacterReader _characterReader;
 
         public CharacterController()
         {
-            _characterService = new();
+            _characterReader = new();
         }
 
         [HttpGet]
         public IActionResult GetCharacters()
         {
-            return Ok(_characterService.GetCharacters());
+            return Ok(_characterReader.GetCharacters());
         }
     }
 }

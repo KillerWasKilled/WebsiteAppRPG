@@ -29,6 +29,7 @@ namespace WebsiteAppRPG.Core.Entities
         [Column("ExitPositionY")]
         public int ExitPositionY { get; set; }
 
+        [ForeignKey("DestinationMapID")]
         [Column("DestinationMapID")]
         [JsonPropertyName("destinationMapId")]
         public int DestinationMapID { get; set; }

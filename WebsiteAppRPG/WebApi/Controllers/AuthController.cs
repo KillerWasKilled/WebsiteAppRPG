@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
-using WebsiteAppRPG.Application.Services.PlayerServices;
+using WebsiteAppRPG.Application.CRUD.PlayerOperations;
 using WebsiteAppRPG.Core.Entities;
 using WebsiteAppRPG.Infrastructure;
 
@@ -14,7 +14,7 @@ namespace WebsiteAppRPG.WebApi.Controllers
     [Route("/apis/auth")]
     public class AuthController : ControllerBase
     {
-        private readonly PlayerReadService _playerReadService;
+        private readonly PlayerReader _playerReadService;
         private readonly TokenProvider _tokenProvider;
 
         public AuthController(IConfiguration configuration)

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.Mvc;
-using WebsiteAppRPG.Application.Services.ObstacleServices;
+using WebsiteAppRPG.Application.CRUD.MapObstacleOperations;
 
 namespace WebsiteAppRPG.WebApi.Controllers
 {

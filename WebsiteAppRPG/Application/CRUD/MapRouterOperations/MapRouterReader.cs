@@ -1,19 +1,19 @@
 ﻿using WebsiteAppRPG.Core.Entities;
 using WebsiteAppRPG.Persistence;
 
-namespace WebsiteAppRPG.Application.Services.MapRouterServices
+namespace WebsiteAppRPG.Application.CRUD.MapRouterOperations
 {
     public class MapRouterReader
     {
-        private readonly ApplicationDbContext _mapRouterReadContext;
+        private readonly ApplicationDbContext _mapRouterContext;
 
         public MapRouterReader()
         {
-            _mapRouterReadContext = new();
+            _mapRouterContext = new();
         }
         public List<MapRouter> GetMapRouters()
         {
-            return [.. _mapRouterReadContext.MapRouters];
+            return [.. _mapRouterContext.MapRouters];
         }
 
     }

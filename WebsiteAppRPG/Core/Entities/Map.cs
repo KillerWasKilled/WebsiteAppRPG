@@ -22,17 +22,22 @@ namespace WebsiteAppRPG.Core.Entities
         [Column("Height")]
         public int Height { get; set; }
 
+        [ForeignKey("BiomeID")]
+        [Column("BiomeID")]
+        [JsonPropertyName("biomeId")]
+        public int BiomeID { get; set; }
+
         public Map()
         {
 
         }
 
-        public Map(string name, int width, int height)
+        public Map(string name, int width, int height, int biomeId)
         {
             Name = name;
-
             Width = width;
             Height = height;
+            BiomeID = biomeId;
         }
     }
 }

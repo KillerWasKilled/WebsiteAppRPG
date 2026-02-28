@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata;
 using WebsiteAppRPG.Application;
-using WebsiteAppRPG.Application.Services.PlayerServices;
+using WebsiteAppRPG.Application.CRUD.PlayerOperations;
 using WebsiteAppRPG.Core.Entities;
 using WebsiteAppRPG.Persistence;
 
@@ -11,31 +11,29 @@ namespace WebsiteAppRPG.WebApi.Controllers
     [Route("apis/players")]
     public class PlayerController : ControllerBase
     {
-        private readonly GameService _gameService;
 
-        private readonly PlayerCreateService _playerCreateService;
-        private readonly PlayerReadService _playerReadService;
+        private readonly PlayerCreator _playerCreator;
+        private readonly PlayerReader _playerReader;
 
         public record NewPlayerRequest(string Email, string Name, string Password);
 
         public PlayerController()
         {
-            _gameService = new();
-            _playerCreateService = new();
-            _playerReadService = new();
+            _playerCreator = new();
+            _playerReader = new();
         }
 
         [HttpPost("/apis/players")]
         public IActionResult CreatePlayer([FromBody] NewPlayerRequest request)
         {
-            _playerCreateService.CreatePlayer(request.Email, request.Name, request.Password);
-            return Ok(_playerReadService.GetPlayers().Last());
+            _playerCreator.CreatePlayer(request.Email, request.Name, request.Password);
+            return Ok(_playerReader.GetPlayers().Last());
         }
 
         [HttpGet]
         public IActionResult GetPlayers()
         {
-            return Ok(_playerReadService.GetPlayers());
+            return Ok(_playerReader.GetPlayers());
         }
 
         /*
