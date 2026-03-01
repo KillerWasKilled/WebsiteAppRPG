@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import "../form-stuff/form.css"
 
-import FormLabel from "./FormLabel";
-import FormButton from "./FormButton";
+import "./form.css"
+import FormHeader from "./form-parts/header/FormHeader";
+import FormLabel from "./form-parts/label/FormLabel";
+import FormButton from "./form-parts/button/FormButton";
 
 import { Player } from "../../models/player";
 import { fetchPlayers, createPlayer } from "../../apis/playerApi";
@@ -53,38 +54,35 @@ export default function Register() {
     }
 
     return (
-        <form action="" method="">
-            <table>
-                <thead>
-                    <tr>
-                        <th>
-                            <h1 className="form-text">We are waiting 4 you</h1>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <FormLabel labelTitle="Email" inputId="email-register-input" inputType="email" inputPlaceholder="johndoe@example.com" maxLength={undefined} />
-                            
-                    <FormLabel labelTitle="Username" inputId="username-register-input" inputType="text" inputPlaceholder="CrazyJoe22" maxLength={50} />
+        <div className="register">
+            <form action="" method="">
+                <table>
+                    <thead>
+                        <FormHeader text="We are waiting 4 you" />
+                    </thead>
+                    <tbody>
+                        <FormLabel labelTitle="Email" inputId="email-register-input" inputType="email" inputPlaceholder="johndoe@example.com" maxLength={undefined} />
+                                
+                        <FormLabel labelTitle="Username" inputId="username-register-input" inputType="text" inputPlaceholder="CrazyJoe22" maxLength={50} />
 
-                    <FormLabel labelTitle="Password" inputId="password-register-input" inputType="password" inputPlaceholder="123456Ab" maxLength={undefined} />
+                        <FormLabel labelTitle="Password" inputId="password-register-input" inputType="password" inputPlaceholder="123456Ab" maxLength={undefined} />
 
-                    <tr>
-                        <td>
-                            <div id="error"></div>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                <div id="error"></div>
+                            </td>
+                        </tr>
 
-                    <FormButton buttonText="Register" btnFunction={handleRegister} />
+                        <FormButton buttonText="Register" btnFunction={handleRegister} />
 
-                    <tr>
-                        <td>
-                            <div>already have an account? <a onClick={handleLogin}>Login!</a></div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </form>
-    
+                        <tr>
+                            <td>
+                                <div>already have an account? <a onClick={handleLogin}>Login!</a></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
     );
 }

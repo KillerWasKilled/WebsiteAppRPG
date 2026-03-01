@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 
 import { useEffect, /*useRef,*/ useState } from "react";
-"./map.css";
+import "./game.css";
+import "./map.css";
 
 import { Player } from "../../models/player"; 
 
@@ -13,12 +14,16 @@ import { fetchPlayerPositions } from "../../apis/playerPositionApi";
 
 import { updatePlayerPosition } from "../../apis/playerPositionApi";
 
+import Header from "../header-stuff/Header";
 import MapPoint from "./MapPoint";
 
 import { MapBarrier } from "../../models/mapBarrier"; 
 import { fetchMapBarriers } from "../../apis/mapBarrierApi"; 
 import { fetchMapRouters } from "../../apis/mapRouterApi";
 import type { MapRouter } from "../../models/mapRouter";
+import type { MapObstacle } from "../../models/mapObstacle";
+import type { Obstacle } from "../../models/obstacle";
+import { deleteMapObstacle, fetchMapObstacles } from "../../apis/mapObstacleApi";
 
 export default function GameMap() {
     const navigateTo = useNavigate();
@@ -29,6 +34,8 @@ export default function GameMap() {
 
     let [localBarriers, setLocalBarriers] = useState<MapBarrier[]>([]);
     let [localRouters, setLocalRouters] = useState<MapRouter[]>([]);
+    let [localObstacles, setLocalObstacles] = useState<Obstacle[]>([]);
+    let [localMapObstacles, setLocalMapObstacles] = useState<MapObstacle[]>([]);
 
     useEffect(() => {
         const fetchPlayer = async () => {
@@ -103,9 +110,11 @@ export default function GameMap() {
 
                 let blockedPart: MapBarrier | undefined;
                 let routerPart: MapRouter | undefined;
+                let obstaclePart: MapObstacle | undefined;
                 
                 blockedPart = localBarriers.find(b => b.positionX === playerPosition.positionX - 1 && b.positionY === playerPosition.positionY);
                 routerPart = localRouters.find(r => r.enterPositionX === playerPosition.positionX - 1 && r.enterPositionY === playerPosition.positionY);
+                obstaclePart = localMapObstacles.find(o => o.positionX === playerPosition.positionX - 1 && o.positionY === playerPosition.positionY);
 
                 if (playerPosition.positionX - 1 >= 0) {
                     if (blockedPart !== undefined) {
@@ -129,6 +138,30 @@ export default function GameMap() {
 
                         setPosition(newPos);
                         await updatePlayerPosition(playerPosition.playerId, newMapId, newX, newY);
+                    }
+
+                    else if (obstaclePart !== undefined) {
+                        await deleteMapObstacle(obstaclePart.mapObstacleId, obstaclePart.positionX, obstaclePart.positionY);
+
+                        if (localMapObstacles.length > 1) {
+                            setLocalMapObstacles(prev => prev.filter(o => o.mapObstacleId !== obstaclePart.mapObstacleId));
+                        }
+                        
+                        else {
+                            setLocalMapObstacles([]);
+                        }
+
+                        let positionX = playerPosition.positionX - 1;
+                        
+                        setPosition(new PlayerPosition(
+                            playerPosition.playerPositionId, 
+                            playerPosition.playerId, 
+                            playerPosition.mapId, 
+                            positionX, 
+                            playerPosition.positionY
+                        ));
+
+                        updatePlayerPosition(playerPosition.playerId, playerPosition.mapId, positionX, playerPosition.positionY);
                     }
 
                     else {
@@ -181,9 +214,11 @@ export default function GameMap() {
 
                 let blockedPart: MapBarrier | undefined;
                 let routerPart: MapRouter | undefined;
+                let obstaclePart: MapObstacle | undefined;
 
                 blockedPart = localBarriers.find(b => b.positionX === playerPosition.positionX && b.positionY === playerPosition.positionY - 1);
                 routerPart = localRouters.find(r => r.enterPositionX === playerPosition.positionX && r.enterPositionY === playerPosition.positionY - 1);
+                obstaclePart = localMapObstacles.find(o => o.positionX === playerPosition.positionX && o.positionY === playerPosition.positionY - 1);
 
                 if (playerPosition.positionY - 1 >= 0) {
                     if (blockedPart !== undefined) {
@@ -207,6 +242,30 @@ export default function GameMap() {
 
                         setPosition(newPos);
                         await updatePlayerPosition(playerPosition.playerId, newMapId, newX, newY);   
+                    }
+
+                    else if (obstaclePart !== undefined) {
+                        await deleteMapObstacle(obstaclePart.mapObstacleId, obstaclePart.positionX, obstaclePart.positionY);
+
+                        if (localMapObstacles.length > 1) {
+                            setLocalMapObstacles(prev => prev.filter(o => o.mapObstacleId !== obstaclePart.mapObstacleId));
+                        }
+                        
+                        else {
+                            setLocalMapObstacles([]);
+                        }
+
+                        let positionY = playerPosition.positionY - 1;
+                        
+                        setPosition(new PlayerPosition(
+                            playerPosition.playerPositionId, 
+                            playerPosition.playerId, 
+                            playerPosition.mapId, 
+                            playerPosition.positionX, 
+                            positionY
+                        ));
+
+                        updatePlayerPosition(playerPosition.playerId, playerPosition.mapId, playerPosition.positionX, positionY);
                     }
 
                     else {
@@ -248,9 +307,11 @@ export default function GameMap() {
             else if (e.key === "ArrowDown" || e.key === "s") {
                 let blockedPart: MapBarrier | undefined;
                 let routerPart: MapRouter | undefined;
+                let obstaclePart: MapObstacle | undefined;
 
                 blockedPart = localBarriers.find(b => b.positionX === playerPosition.positionX && b.positionY === playerPosition.positionY + 1);
                 routerPart = localRouters.find(r => r.enterPositionX === playerPosition.positionX && r.enterPositionY === playerPosition.positionY + 1);
+                obstaclePart = localMapObstacles.find(o => o.positionX === playerPosition.positionX && o.positionY === playerPosition.positionY + 1);
                 console.log(routerPart);
 
                 if (playerPosition.positionY + 1 < map.height) {
@@ -278,6 +339,30 @@ export default function GameMap() {
                         
                     }
 
+                    else if (obstaclePart !== undefined) {
+                        await deleteMapObstacle(obstaclePart.mapObstacleId, obstaclePart.positionX, obstaclePart.positionY);
+
+                        if (localMapObstacles.length > 1) {
+                            setLocalMapObstacles(prev => prev.filter(o => o.mapObstacleId !== obstaclePart.mapObstacleId));
+                        }
+                        
+                        else {
+                            setLocalMapObstacles([]);
+                        }
+
+                        let positionY = playerPosition.positionY + 1;
+                        
+                        setPosition(new PlayerPosition(
+                            playerPosition.playerPositionId, 
+                            playerPosition.playerId, 
+                            playerPosition.mapId, 
+                            playerPosition.positionX, 
+                            positionY
+                        ));
+
+                        updatePlayerPosition(playerPosition.playerId, playerPosition.mapId, playerPosition.positionX, positionY);
+                    }
+
                     else {
 
                         let positionY = playerPosition.positionY + 1;
@@ -300,8 +385,11 @@ export default function GameMap() {
 
                 let blockedPart: MapBarrier | undefined;
                 let routerPart: MapRouter | undefined;
+                let obstaclePart: MapObstacle | undefined;
+
                 blockedPart = localBarriers.find(b => b.positionX === playerPosition.positionX + 1 && b.positionY === playerPosition.positionY);
                 routerPart = localRouters.find(r => r.enterPositionX === playerPosition.positionX + 1 && r.enterPositionY === playerPosition.positionY);
+                obstaclePart = localMapObstacles.find(o => o.positionX === playerPosition.positionX + 1 && o.positionY === playerPosition.positionY);
 
                 if (playerPosition.positionX + 1 < map.width) {
                     if (blockedPart !== undefined) {
@@ -326,6 +414,30 @@ export default function GameMap() {
                         setPosition(newPos);
                         await updatePlayerPosition(playerPosition.playerId, newMapId, newX, newY);
                         
+                    }
+
+                    else if (obstaclePart !== undefined) {
+                        await deleteMapObstacle(obstaclePart.mapObstacleId, obstaclePart.positionX, obstaclePart.positionY);
+
+                        if (localMapObstacles.length > 1) {
+                            setLocalMapObstacles(prev => prev.filter(o => o.mapObstacleId !== obstaclePart.mapObstacleId));
+                        }
+                        
+                        else {
+                            setLocalMapObstacles([]);
+                        }
+
+                        let positionX = playerPosition.positionX + 1;
+                        
+                        setPosition(new PlayerPosition(
+                            playerPosition.playerPositionId, 
+                            playerPosition.playerId, 
+                            playerPosition.mapId, 
+                            positionX, 
+                            playerPosition.positionY
+                        ));
+
+                        updatePlayerPosition(playerPosition.playerId, playerPosition.mapId, positionX, playerPosition.positionY);
                     }
 
                     else {
@@ -388,6 +500,15 @@ export default function GameMap() {
 
             setLocalRouters(data.filter(r => r.mapId === map.mapId));
         });
+
+        fetchMapObstacles().then(data => {
+            if (!map) {
+                return;
+            }
+
+            setLocalMapObstacles(data.filter(mo => mo.mapId === map.mapId));
+            console.log(data);
+        })
         
     }, [map]);
 
@@ -397,12 +518,18 @@ export default function GameMap() {
     }
 
     return (
-        <div className="map-box">
-            {Array.from({ length: map.height }).map((_, rowIndex) => (
-                <div key={rowIndex} className="map-row">
-                    <MapPoint width={map.width} height={rowIndex} player={player} playerPosition={playerPosition} localBarriers={localBarriers} localRouters={localRouters} />
+        <div id="game">
+            <Header />
+            <div className="area">
+                <div className="map-box">
+                    {Array.from({ length: map.height }).map((_, rowIndex) => (
+                        <div key={rowIndex} className="map-row">
+                            <MapPoint width={map.width} height={rowIndex} player={player} playerPosition={playerPosition} localBarriers={localBarriers} localRouters={localRouters}
+                            localObstacles={localMapObstacles} />
+                        </div>
+                    ))}
                 </div>
-            ))}
+            </div>
         </div>
     );
 

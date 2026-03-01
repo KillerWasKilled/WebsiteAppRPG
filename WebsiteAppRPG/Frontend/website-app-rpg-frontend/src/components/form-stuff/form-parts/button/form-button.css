@@ -1,0 +1,11 @@
+.button-part{
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    background-color: #0071FC;
+    border: 3px outset #09348a;
+    padding-block: 6px;
+    padding-inline: 24px;
+}

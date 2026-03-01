@@ -188,5 +188,10 @@ GO
 
 INSERT INTO MapsObstacles (MapID, ObstacleID, PositionX, PositionY)
 VALUES
-(2, 2, 14, 9);
+(2, 2, 14, 9),
+(2, 2, 14, 8),
+(2, 2, 14, 7),
+(2, 3, 15, 7),
+(2, 3, 16, 7),
+(2, 2, 14, 6);
 GO

@@ -16,6 +16,12 @@
     border: 1px solid;
 }
 
+.show-point{
+    width: 60px;
+    height: 60px;
+    border: 1px solid;
+}
+
 .map-point{
     width: 15px;
     height: 15px;
@@ -39,12 +45,25 @@
     background-color: rgb(32, 32, 32);
 }
 
-.map-obstacle{
+.map-obstacle-1{
     width: 15px;
     height: 15px;
-
     border: 1px solid rgb(18, 61, 18);
     background-color: green;
+}
+
+.map-obstacle-2{
+    width: 15px;
+    height: 15px;
+    border: 1px solid #e98c00;
+    background-color: #f0c95d;
+}
+
+.map-obstacle-3{
+    width: 15px;
+    height: 15px;
+    border: 1px solid rgb(30, 31, 30);
+    background-color: gray;
 }
 
 .character-1{

@@ -15,10 +15,10 @@ namespace WebsiteAppRPG.Application.CRUD.MapObstacleOperations
             _obstacleReader = new();
         }
 
-        public void DeleteMapObstacle(int mapId, int positionX, int positionY)
+        public void DeleteMapObstacle(int mapObstacleId, int positionX, int positionY)
         {
             MapObstacle? moToDelete = _mapObstacleContext.MapObstacles.FirstOrDefault(
-                obstacle => obstacle.MapObstacleID == mapId && 
+                obstacle => obstacle.MapObstacleID == mapObstacleId && 
                 obstacle.PositionX == positionX && 
                 obstacle.PositionY == positionY);
 

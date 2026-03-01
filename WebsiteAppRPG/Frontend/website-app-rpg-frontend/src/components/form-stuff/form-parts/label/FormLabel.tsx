@@ -1,4 +1,4 @@
-import "../form-stuff/form.css"
+import "../label/form-label.css"
 
 export default function FormLabel({ labelTitle, inputId, inputType, inputPlaceholder, maxLength } : 
     { labelTitle: string, inputId: string, inputType: string, inputPlaceholder: string | null, maxLength: number | undefined }) {

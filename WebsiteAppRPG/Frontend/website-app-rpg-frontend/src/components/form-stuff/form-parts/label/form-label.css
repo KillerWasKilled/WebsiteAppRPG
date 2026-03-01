@@ -1,0 +1,16 @@
+label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+input {
+    background-color: #0071FC;
+    border: 4px outset #09348a;
+    padding-block: 6px;
+}
+
+input:focus-visible{
+    outline: none;
+    color: white;
+}

@@ -1,0 +1,12 @@
+header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #0039FD;
+    gap: 30px;
+    height: 6vh;
+}
+
+header > button:last-child {
+    margin-right: 75px;
+}

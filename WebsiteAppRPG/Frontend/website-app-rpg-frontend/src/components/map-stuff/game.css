@@ -1,0 +1,13 @@
+#game{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.area{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}

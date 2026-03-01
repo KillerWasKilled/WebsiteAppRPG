@@ -30,9 +30,8 @@ namespace WebsiteAppRPG.Persistence
             optionsBuilder.UseSqlServer(homeConnectionString);
 
             // School
-            /*
-            string schoolConnectionString = "Server=L107PC03;Database=WebAppRPGDb;Trusted_Connection=True;TrustServerCertificate=True;";
-            optionsBuilder.UseSqlServer(schoolConnectionString);*/
+            // string schoolConnectionString = "Server=L107PC03;Database=WebAppRPGDb;Trusted_Connection=True;TrustServerCertificate=True;";
+            // optionsBuilder.UseSqlServer(schoolConnectionString);
         }
 
     }

@@ -6,16 +6,20 @@ import "./map.css";
 import { MapBarrier } from "../../models/mapBarrier";
 import { MapRouter } from "../../models/mapRouter";
 import "./map.css";
+import type { MapObstacle } from "../../models/mapObstacle";
 
 
 
-export default function MapPoint({ width, height, player , playerPosition, localBarriers, localRouters } : 
-    { width : number, height: number, player: Player, playerPosition: PlayerPosition, localBarriers : MapBarrier[], localRouters: MapRouter[] }) {
+export default function MapPoint({ width, height, player , playerPosition, localBarriers, localRouters, localObstacles } : 
+    { width : number, height: number, player: Player, playerPosition: PlayerPosition, localBarriers : MapBarrier[], localRouters: MapRouter[], localObstacles: MapObstacle[] }) {
 
     function classHandler(index: number, characterId: string) {
 
         let barrierIsHere: boolean = false;
         let routerIsHere: boolean = false;
+
+        let obstacleIsHere: boolean = false;
+        let obstacleId = 0;
 
         localBarriers.forEach((barrier) => {
             if (barrier.positionX === index && barrier.positionY === height) {
@@ -28,6 +32,13 @@ export default function MapPoint({ width, height, player , playerPosition, local
                 routerIsHere = true;
             }
         });
+
+        localObstacles.forEach((obstacle) => {
+            if (obstacle.positionX === index && obstacle.positionY === height) {
+                obstacleIsHere = true;
+                obstacleId = obstacle.obstacleId;
+            }
+        });
         
         if (barrierIsHere) {
             return `point map-barrier`;
@@ -35,6 +46,10 @@ export default function MapPoint({ width, height, player , playerPosition, local
 
         if (routerIsHere) {
             return `point map-router`;
+        }
+
+        if (obstacleIsHere) {
+            return `point map-obstacle-${obstacleId}`;
         }
 
         else if (playerPosition.positionX === index && playerPosition.positionY === height) {
