@@ -19,3 +19,12 @@ export async function createPlayer(email: string, name: string, password: string
 
   return await response.json();
 }
+
+export async function updatePlayersCharacter(characterId: number) {
+  await fetch(apiUrl + "/me", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id: characterId }),
+    credentials: "include"
+  });
+}

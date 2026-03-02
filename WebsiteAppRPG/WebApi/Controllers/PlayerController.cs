@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata;
+using System.Security.Claims;
 using WebsiteAppRPG.Application;
 using WebsiteAppRPG.Application.CRUD.PlayerOperations;
 using WebsiteAppRPG.Core.Entities;
@@ -14,13 +16,16 @@ namespace WebsiteAppRPG.WebApi.Controllers
 
         private readonly PlayerCreator _playerCreator;
         private readonly PlayerReader _playerReader;
+        private readonly PlayerUpdater _playerUpdater;
 
         public record NewPlayerRequest(string Email, string Name, string Password);
+        public record CharacterRequest(int CharacterId);
 
         public PlayerController()
         {
             _playerCreator = new();
             _playerReader = new();
+            _playerUpdater = new();
         }
 
         [HttpPost("/apis/players")]
@@ -37,21 +42,15 @@ namespace WebsiteAppRPG.WebApi.Controllers
         }
 
         /*
-        [HttpPost("/apis/players/{id}")]
-        public IActionResult UpdatePlayerPosition(int id, [FromBody] PlayerPosition position)
+        [Authorize]
+        [HttpPost("me")]
+        public IActionResult UpdatePlayersCharacter([FromBody] CharacterRequest request)
         {
-            List<Player> players = _gameService.GetPlayers();
+            var playerId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
 
-            Player? player = players.First(x => x.PlayerID == id);
+            _playerUpdater.UpdateCharacter(playerId, request.CharacterId);
 
-            if (player != null)
-            {
-                player.PositionX = position.X;
-                player.PositionY = position.Y;
-                _gameService.Save();
-            }
-
-            return Ok(player);
+            return Ok(_playerReader.GetPlayers().Where(p => p.PlayerID == playerId).First());
         }
         */
 

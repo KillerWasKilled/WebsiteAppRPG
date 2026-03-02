@@ -26,12 +26,12 @@ namespace WebsiteAppRPG.Persistence
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // Home
-            string homeConnectionString = "Server=SAMUEL;Database=WebAppRPGDb;Trusted_Connection=True;TrustServerCertificate=True;";
-            optionsBuilder.UseSqlServer(homeConnectionString);
+            // string homeConnectionString = "Server=SAMUEL;Database=WebAppRPGDb;Trusted_Connection=True;TrustServerCertificate=True;";
+            // optionsBuilder.UseSqlServer(homeConnectionString);
 
             // School
-            // string schoolConnectionString = "Server=L107PC03;Database=WebAppRPGDb;Trusted_Connection=True;TrustServerCertificate=True;";
-            // optionsBuilder.UseSqlServer(schoolConnectionString);
+            string schoolConnectionString = "Server=L107PC03;Database=WebAppRPGDb;Trusted_Connection=True;TrustServerCertificate=True;";
+            optionsBuilder.UseSqlServer(schoolConnectionString);
         }
 
     }
